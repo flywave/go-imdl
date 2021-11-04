@@ -1,0 +1,310 @@
+package imdl
+
+import "github.com/flywave/gltf"
+
+type FeatureIndexType uint32
+
+const (
+	Empty      FeatureIndexType = 0
+	NonUniform FeatureIndexType = 2
+	Uniform    FeatureIndexType = 1
+)
+
+type PrimitiveType uint32
+
+const (
+	_Mesh     PrimitiveType = 0
+	_Polyline PrimitiveType = 1
+	_Point    PrimitiveType = 2
+)
+
+type MaterialAtlas struct {
+	NumMaterials    uint32 `json:"numMaterials,omitempty"`
+	HasTranslucency *bool  `json:"hasTranslucency,omitempty"`
+	OverridesAlpha  *bool  `json:"overridesAlpha,omitempty"`
+}
+
+type Instances struct {
+	Count              uint32    `json:"count,omitempty"`
+	TransformCenter    []float32 `json:"transformCenter,omitempty"`
+	FeatureIds         string    `json:"featureIds,omitempty"`
+	Transforms         string    `json:"transforms,omitempty"`
+	SymbologyOverrides string    `json:"symbologyOverrides,omitempty"`
+}
+
+type VertexTable struct {
+	BufferView       string           `json:"bufferView"`
+	Count            uint32           `json:"count"`
+	NumRgbaPerVertex uint32           `json:"numRgbaPerVertex"`
+	NumColors        *uint32          `json:"numColors,omitempty"`
+	Width            uint32           `json:"width"`
+	Height           uint32           `json:"height"`
+	HasTranslucency  bool             `json:"hasTranslucency"`
+	FeatureIndexType FeatureIndexType `json:"featureIndexType"`
+	FeatureId        *uint32          `json:"featureID,omitempty"`
+	UniformColor     uint32           `json:"uniformColor,omitempty"`
+	Params           struct {
+		DecodeMatrix []float32 `json:"decodeMatrix"`
+		DecodedMin   []float32 `json:"decodedMin"`
+		DecodedMax   []float32 `json:"decodedMax"`
+	} `json:"params"`
+	MaterialAtlas *MaterialAtlas `json:"materialAtlas,omitempty"`
+}
+
+type Primitive struct {
+	Material              string      `json:"material,omitempty"`
+	Vertices              VertexTable `json:"vertices,omitempty"`
+	IsPlanar              *bool       `json:"isPlanar,omitempty"`
+	ViewIndependentOrigin *[3]float32 `json:"viewIndependentOrigin,omitempty"`
+	Instances             *Instances  `json:"instances,omitempty"`
+}
+
+type SegmentEdges struct {
+	Indices                string `json:"indices"`
+	EndPointAndQuadIndices string `json:"endPointAndQuadIndices"`
+}
+
+type SilhouetteEdges struct {
+	SegmentEdges
+	NormalPairs string `json:"normalPairs"`
+}
+
+type Polyline struct {
+	Indices              string `json:"indices"`
+	PrevIndices          string `json:"prevIndices"`
+	NextIndicesAndParams string `json:"nextIndicesAndParams"`
+}
+
+type MeshEdges struct {
+	Segments    *SegmentEdges    `json:"segments,omitempty"`
+	Silhouettes *SilhouetteEdges `json:"silhouettes,omitempty"`
+	Polylines   *Polyline        `json:"polylines,omitempty"`
+}
+
+type ClipPlane struct {
+	Normal    *[3]float32 `json:"normal,omitempty"`
+	Dist      *float32    `json:"dist,omitempty"`
+	Invisible *bool       `json:"invisible,omitempty"`
+	Interior  *bool       `json:"interior,omitempty"`
+}
+
+type ConvexClipPlaneSet []ClipPlane
+
+type UnionOfConvexClipPlaneSets []ConvexClipPlaneSet
+
+type ClipPrimitive interface{}
+
+type ClipPrimitivePlanes struct {
+	ClipPrimitive
+	Planes *struct {
+		Clips     *UnionOfConvexClipPlaneSets `json:"clips,omitempty"`
+		Invisible *bool                       `json:"invisible,omitempty"`
+	} `json:"planes,omitempty"`
+}
+
+type ClipPrimitiveShape struct {
+	ClipPrimitive
+	Shape *struct {
+		Points    [][3]float32 `json:"points,omitempty"`
+		Trans     *[16]float32 `json:"trans,omitempty"`
+		ZLow      *float32     `json:"zlow,omitempty"`
+		ZHigh     *float32     `json:"zhigh,omitempty"`
+		Mask      *bool        `json:"mask,omitempty"`
+		Invisible *bool        `json:"invisible,omitempty"`
+	} `json:"shape,omitempty"`
+}
+
+type ClipVector []ClipPrimitive
+
+type Range3d struct {
+	Low  [3]float32 `json:"low"`
+	High [3]float32 `json:"high"`
+}
+
+type AreaPattern struct {
+	Type                  string      `json:"type"` //"areaPattern"
+	SymbolName            string      `json:"symbolName"`
+	Clip                  ClipVector  `json:"clip"`
+	Scale                 float32     `json:"scale"`
+	Spacing               [2]float32  `json:"spacing"`
+	OrgTransform          [16]float32 `json:"orgTransform"`
+	Origin                [2]float32  `json:"origin"`
+	XYOffsets             string      `json:"xyOffsets"`
+	FeatureId             uint32      `json:"featureId"`
+	ModelTransform        [16]float32 `json:"modelTransform"`
+	Range                 Range3d     `json:"range"`
+	SymbolTranslation     [3]float32  `json:"symbolTranslation"`
+	ViewIndependentOrigin *[3]float32 `json:"viewIndependentOrigin"`
+}
+
+type SurfaceType uint32
+
+const (
+	ST_Unlit            SurfaceType = 0
+	ST_Lit              SurfaceType = 1
+	ST_Textured         SurfaceType = 2
+	ST_TexturedLit      SurfaceType = 3
+	ST_VolumeClassifier SurfaceType = 4
+)
+
+type Surface struct {
+	Type                 SurfaceType `json:"type,omitempty"`
+	Indices              string      `json:"indices,omitempty"`
+	AlwaysDisplayTexture *bool       `json:"alwaysDisplayTexture,omitempty"`
+	UVParams             *struct {
+		DecodedMin []float32 `json:"decodedMin"`
+		DecodedMax []float32 `json:"decodedMax"`
+	} `json:"uvParams"`
+}
+
+type AuxChannel struct {
+	Name    string   `json:"name"`
+	Inputs  []uint32 `json:"inputs"`
+	Indices []uint32 `json:"indices"`
+}
+
+type QuantizedAuxChannel struct {
+	AuxChannel
+	QOrigin []float32 `json:"qOrigin"`
+	QScale  []float32 `json:"qScale"`
+}
+
+type AuxChannelTable struct {
+	BufferView        string                `json:"bufferView"`
+	Width             uint32                `json:"width"`
+	Height            uint32                `json:"height"`
+	Count             uint32                `json:"count"`
+	NumBytesPerVertex uint32                `json:"numBytesPerVertex"`
+	Displacements     []QuantizedAuxChannel `json:"displacements,omitempty"`
+	Normals           []AuxChannel          `json:"normals,omitempty"`
+	Params            []QuantizedAuxChannel `json:"params,omitempty"`
+}
+
+type MeshPrimitive struct {
+	Primitive
+	Type        PrimitiveType    `json:"type,omitempty"` // Mesh
+	Surface     Surface          `json:"surface"`
+	Edges       *MeshEdges       `json:"edges,omitempty"`
+	AuxChannels *AuxChannelTable `json:"auxChannels,omitempty"`
+	AreaPattern *AreaPattern     `json:"areaPattern,omitempty"`
+}
+
+type PolylinePrimitive struct {
+	Primitive
+	Polyline
+	Type PrimitiveType `json:"type,omitempty"` // Polyline
+}
+
+type PointStringPrimitive struct {
+	Primitive
+	Type    PrimitiveType `json:"type,omitempty"` // Point
+	Indices string        `json:"indices,omitempty"`
+}
+
+type Mesh struct {
+	Primitives []interface{} `json:"primitives,omitempty"`
+	Layer      string        `json:"layer,omitempty"`
+}
+
+type AreaPatternSymbol struct {
+	Primitives []interface{} `json:"primitives,omitempty"`
+}
+
+type RenderTexture struct {
+	BufferView    string `json:"bufferView"`
+	Format        uint32 `json:"format"`
+	Width         uint32 `json:"width"`
+	Height        uint32 `json:"height"`
+	IsGlyph       bool   `json:"isGlyph"`
+	IsTileSection bool   `json:"isTileSection"`
+}
+
+type TextureMappingMode int32
+
+const (
+	TM_Cubic            TextureMappingMode = 4
+	TM_Cylindrical      TextureMappingMode = 6
+	TM_DirectionalDrape TextureMappingMode = 3
+	TM_ElevationDrape   TextureMappingMode = 1
+	TM_FrontProject     TextureMappingMode = 8
+	TM_None             TextureMappingMode = -1
+	TM_Parametric       TextureMappingMode = 0
+	TM_Planar           TextureMappingMode = 2
+	TM_Solid            TextureMappingMode = 7
+	TM_Spherical        TextureMappingMode = 5
+)
+
+type Texture struct {
+	Name   string `json:"name"`
+	Params struct {
+		mode          TextureMappingMode `json:"mode"`
+		textureMatrix [][3]float64       `json:"transform"`
+		Weight        float64            `json:"weight"`
+		WorldMapping  bool               `json:"worldMapping"`
+	} `json:"params"`
+}
+
+type TextureMapping struct {
+	Texture Texture `json:"texture"`
+}
+
+type RenderMaterial struct {
+	Ambient          float32         `json:"ambient"`
+	Diffuse          float32         `json:"diffuse"`
+	DiffuseColor     *[3]float32     `json:"diffuseColor,omitempty"`
+	EmissiveColor    *[3]float32     `json:"emissiveColor,omitempty"`
+	Key              string          `json:"key,omitempty"`
+	Reflect          float32         `json:"reflect"`
+	ReflectColor     *[3]float32     `json:"reflectColor,omitempty"`
+	Refract          float32         `json:"refract"`
+	Shadows          bool            `json:"shadows"`
+	Specular         float32         `json:"specular"`
+	SpecularColor    *[3]float32     `json:"specularColor,omitempty"`
+	SpecularExponent float32         `json:"specularExponent"`
+	Transparency     *float32        `json:"transparency,omitempty"`
+	TextureMapping   *TextureMapping `json:"textureMapping"`
+}
+
+type Scene struct {
+	Name  string   `json:"name,omitempty"`
+	Nodes []string `json:"nodes,omitempty"`
+}
+
+type Material struct {
+	CategoryId     string   `json:"categoryId"`
+	FillColor      *uint32  `json:"fillColor,omitempty"`
+	FillFlags      *uint32  `json:"fillFlags,omitempty"`
+	IgnoreLighting *bool    `json:"ignoreLighting,omitempty"`
+	LineColor      *uint32  `json:"lineColor,omitempty"`
+	LinePixels     *uint32  `json:"linePixels,omitempty"`
+	LineWidth      *uint32  `json:"lineWidth,omitempty"`
+	MaterialId     string   `json:"materialId"`
+	SubCategoryId  string   `json:"subCategoryId"`
+	Texture        *Texture `json:"texture,omitempty"`
+	Type           uint32   `json:"type"`
+}
+
+type Document struct {
+	ExtensionsUsed   []string                    `json:"extensionsUsed,omitempty"`
+	GLExtensionsUsed []string                    `json:"glExtensionsUsed,omitempty"`
+	Buffers          map[string]*gltf.Buffer     `json:"buffers,omitempty" validate:"dive"`
+	BufferViews      map[string]*gltf.BufferView `json:"bufferViews,omitempty" validate:"dive"`
+	Materials        map[string]*Material        `json:"materials,omitempty" validate:"dive"`
+	Meshes           map[string]*Mesh            `json:"meshes,omitempty" validate:"dive"`
+	Nodes            map[string]string           `json:"nodes,omitempty" validate:"dive"`
+	Scene            *string                     `json:"scene,omitempty"`
+	Scenes           map[string]*Scene           `json:"scenes,omitempty" validate:"dive"`
+	NamedTextures    map[string]*RenderTexture   `json:"namedTextures,omitempty" validate:"dive"`
+	RenderMaterials  map[string]*RenderMaterial  `json:"renderMaterials,omitempty" validate:"dive"`
+}
+
+func newString(s string) *string {
+	return &s
+}
+
+func NewDocument() *Document {
+	return &Document{
+		Scene:  newString("defaultScene"),
+		Scenes: map[string]*Scene{"defaultScene": &Scene{Nodes: []string{"rootNode"}}},
+	}
+}

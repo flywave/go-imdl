@@ -1,0 +1,2784 @@
+{
+    "bufferViews": {
+        "0x4f": {
+            "buffer": "binary_glTF",
+            "byteLength": 17671,
+            "byteOffset": 634880
+        },
+        "0x59": {
+            "buffer": "binary_glTF",
+            "byteLength": 310056,
+            "byteOffset": 264524
+        },
+        "0x5e": {
+            "buffer": "binary_glTF",
+            "byteLength": 21392,
+            "byteOffset": 797760
+        },
+        "0x6e": {
+            "buffer": "binary_glTF",
+            "byteLength": 203418,
+            "byteOffset": 878272
+        },
+        "0x70": {
+            "buffer": "binary_glTF",
+            "byteLength": 47356,
+            "byteOffset": 678128
+        },
+        "0x8d": {
+            "buffer": "binary_glTF",
+            "byteLength": 56051,
+            "byteOffset": 577868
+        },
+        "0xab": {
+            "buffer": "binary_glTF",
+            "byteLength": 36995,
+            "byteOffset": 1089248
+        },
+        "bvInstanceFeatures22": {
+            "buffer": "binary_glTF",
+            "byteLength": 18,
+            "byteOffset": 1173480
+        },
+        "bvInstanceTransforms22": {
+            "buffer": "binary_glTF",
+            "byteLength": 288,
+            "byteOffset": 1173500
+        },
+        "bvVertex0": {
+            "buffer": "binary_glTF",
+            "byteLength": 168896,
+            "byteOffset": 0
+        },
+        "bvVertex1": {
+            "buffer": "binary_glTF",
+            "byteLength": 2368,
+            "byteOffset": 574580
+        },
+        "bvVertex10": {
+            "buffer": "binary_glTF",
+            "byteLength": 320,
+            "byteOffset": 727284
+        },
+        "bvVertex11": {
+            "buffer": "binary_glTF",
+            "byteLength": 240,
+            "byteOffset": 727696
+        },
+        "bvVertex12": {
+            "buffer": "binary_glTF",
+            "byteLength": 1568,
+            "byteOffset": 728080
+        },
+        "bvVertex13": {
+            "buffer": "binary_glTF",
+            "byteLength": 384,
+            "byteOffset": 730188
+        },
+        "bvVertex14": {
+            "buffer": "binary_glTF",
+            "byteLength": 224,
+            "byteOffset": 730772
+        },
+        "bvVertex15": {
+            "buffer": "binary_glTF",
+            "byteLength": 36864,
+            "byteOffset": 731068
+        },
+        "bvVertex16": {
+            "buffer": "binary_glTF",
+            "byteLength": 4768,
+            "byteOffset": 789624
+        },
+        "bvVertex17": {
+            "buffer": "binary_glTF",
+            "byteLength": 40352,
+            "byteOffset": 819152
+        },
+        "bvVertex18": {
+            "buffer": "binary_glTF",
+            "byteLength": 5120,
+            "byteOffset": 1081692
+        },
+        "bvVertex19": {
+            "buffer": "binary_glTF",
+            "byteLength": 432,
+            "byteOffset": 1088660
+        },
+        "bvVertex2": {
+            "buffer": "binary_glTF",
+            "byteLength": 416,
+            "byteOffset": 633920
+        },
+        "bvVertex20": {
+            "buffer": "binary_glTF",
+            "byteLength": 38400,
+            "byteOffset": 1126244
+        },
+        "bvVertex21": {
+            "buffer": "binary_glTF",
+            "byteLength": 92,
+            "byteOffset": 1172656
+        },
+        "bvVertex22": {
+            "buffer": "binary_glTF",
+            "byteLength": 384,
+            "byteOffset": 1172988
+        },
+        "bvVertex3": {
+            "buffer": "binary_glTF",
+            "byteLength": 288,
+            "byteOffset": 634500
+        },
+        "bvVertex4": {
+            "buffer": "binary_glTF",
+            "byteLength": 2048,
+            "byteOffset": 652552
+        },
+        "bvVertex5": {
+            "buffer": "binary_glTF",
+            "byteLength": 15592,
+            "byteOffset": 655448
+        },
+        "bvVertex6": {
+            "buffer": "binary_glTF",
+            "byteLength": 768,
+            "byteOffset": 677124
+        },
+        "bvVertex7": {
+            "buffer": "binary_glTF",
+            "byteLength": 64,
+            "byteOffset": 725484
+        },
+        "bvVertex8": {
+            "buffer": "binary_glTF",
+            "byteLength": 480,
+            "byteOffset": 725568
+        },
+        "bvVertex9": {
+            "buffer": "binary_glTF",
+            "byteLength": 768,
+            "byteOffset": 726228
+        },
+        "bvindices0Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 95625,
+            "byteOffset": 168896
+        },
+        "bvindices10Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 90,
+            "byteOffset": 727604
+        },
+        "bvindices11Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 144,
+            "byteOffset": 727936
+        },
+        "bvindices12Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 540,
+            "byteOffset": 729648
+        },
+        "bvindices13Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 198,
+            "byteOffset": 730572
+        },
+        "bvindices14Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 72,
+            "byteOffset": 730996
+        },
+        "bvindices15Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 21690,
+            "byteOffset": 767932
+        },
+        "bvindices16Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 3366,
+            "byteOffset": 794392
+        },
+        "bvindices17Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 18765,
+            "byteOffset": 859504
+        },
+        "bvindices18Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 1845,
+            "byteOffset": 1086812
+        },
+        "bvindices19Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 153,
+            "byteOffset": 1089092
+        },
+        "bvindices1Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 918,
+            "byteOffset": 576948
+        },
+        "bvindices20Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 8010,
+            "byteOffset": 1164644
+        },
+        "bvindices21": {
+            "buffer": "binary_glTF",
+            "byteLength": 72,
+            "byteOffset": 1172748
+        },
+        "bvindices22Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 108,
+            "byteOffset": 1173372
+        },
+        "bvindices2Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 162,
+            "byteOffset": 634336
+        },
+        "bvindices3Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 90,
+            "byteOffset": 634788
+        },
+        "bvindices4Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 846,
+            "byteOffset": 654600
+        },
+        "bvindices5Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 6084,
+            "byteOffset": 671040
+        },
+        "bvindices6Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 234,
+            "byteOffset": 677892
+        },
+        "bvindices7Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 18,
+            "byteOffset": 725548
+        },
+        "bvindices8Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 180,
+            "byteOffset": 726048
+        },
+        "bvindices9Surface": {
+            "buffer": "binary_glTF",
+            "byteLength": 288,
+            "byteOffset": 726996
+        },
+        "bvnextIndicesAndParams21": {
+            "buffer": "binary_glTF",
+            "byteLength": 96,
+            "byteOffset": 1172892
+        },
+        "bvprevIndices21": {
+            "buffer": "binary_glTF",
+            "byteLength": 72,
+            "byteOffset": 1172820
+        }
+    },
+    "buffers": {
+        "binary_glTF": {
+            "byteLength": 1173788
+        }
+    },
+    "extensionsUsed": [
+        "KHR_binary_glTF",
+        "WEB3D_quantized_attributes"
+    ],
+    "glExtensionsUsed": [
+        "OES_element_index_uint"
+    ],
+    "materials": {
+        "Material0": {
+            "categoryId": "0xc2",
+            "fillColor": 30177,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 30177,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xc3",
+            "type": 0
+        },
+        "Material1": {
+            "categoryId": "0xc4",
+            "fillColor": 16711680,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16711680,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x5a",
+            "subCategoryId": "0xc5",
+            "texture": {
+                "name": "0x59",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            0.20000000000000001,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -0.21420766619248230,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material10": {
+            "categoryId": "0xd2",
+            "fillColor": 14803425,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 14803425,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xd3",
+            "type": 0
+        },
+        "Material11": {
+            "categoryId": "0xc2",
+            "fillColor": 30177,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 30177,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x61",
+            "subCategoryId": "0xc3",
+            "type": 0
+        },
+        "Material12": {
+            "categoryId": "0xb4",
+            "fillColor": 16711680,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16711680,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x5a",
+            "subCategoryId": "0xb5",
+            "texture": {
+                "name": "0x59",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            0.20000000000000001,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -0.21420766619248230,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material13": {
+            "categoryId": "0xb4",
+            "fillColor": 16711680,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16711680,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x71",
+            "subCategoryId": "0xb5",
+            "texture": {
+                "name": "0x70",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            1.3333333333333333,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -2.2831675753673619,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material14": {
+            "categoryId": "0xc2",
+            "fillColor": 30177,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 30177,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x90",
+            "subCategoryId": "0xc3",
+            "texture": {
+                "name": "0x8d",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            -1.8369701987210297e-16,
+                            -1.0,
+                            0.0
+                        ],
+                        [
+                            -1.6000000000000001,
+                            2.9391523179536476e-16,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material15": {
+            "categoryId": "0xbc",
+            "fillColor": 16777215,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16777215,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xbd",
+            "type": 0
+        },
+        "Material16": {
+            "categoryId": "0xd0",
+            "fillColor": 16711680,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16711680,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x6d",
+            "subCategoryId": "0xd1",
+            "type": 0
+        },
+        "Material17": {
+            "categoryId": "0xbc",
+            "fillColor": 16777215,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16777215,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0xad",
+            "subCategoryId": "0xbd",
+            "texture": {
+                "name": "0x5e",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            4.8985871965894128e-16,
+                            8.0,
+                            0.0
+                        ],
+                        [
+                            7.6712412835520913,
+                            -4.6972805416945509e-16,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material18": {
+            "categoryId": "0xd0",
+            "fillColor": 16777215,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16777215,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x6f",
+            "subCategoryId": "0xd1",
+            "texture": {
+                "name": "0x6e",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            3.0030030030030028,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -7.5075075075075066,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material19": {
+            "categoryId": "0xbc",
+            "fillColor": 16777215,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16777215,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x71",
+            "subCategoryId": "0xbd",
+            "texture": {
+                "name": "0x70",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            1.3333333333333333,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -2.2831675753673619,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material2": {
+            "categoryId": "0xc2",
+            "fillColor": 30177,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 30177,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x90",
+            "subCategoryId": "0xc3",
+            "texture": {
+                "name": "0x8d",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            -1.8369701987210297e-16,
+                            -1.0,
+                            0.0
+                        ],
+                        [
+                            -1.6000000000000001,
+                            2.9391523179536476e-16,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material20": {
+            "categoryId": "0xbc",
+            "fillColor": 16777215,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 16777215,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0xb0",
+            "subCategoryId": "0xbd",
+            "texture": {
+                "name": "0xab",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            3.0616169978683826e-16,
+                            5.0,
+                            0.0
+                        ],
+                        [
+                            2.3936902325470060,
+                            -1.4657125407194873e-16,
+                            0.0
+                        ]
+                    ],
+                    "weight": 0.69999999999999996,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material21": {
+            "categoryId": "0xc8",
+            "fillColor": 60,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 60,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xc9",
+            "type": 1
+        },
+        "Material22": {
+            "categoryId": "0xc8",
+            "fillColor": 60,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 60,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x72",
+            "subCategoryId": "0xc9",
+            "type": 0
+        },
+        "Material3": {
+            "categoryId": "0xcc",
+            "fillColor": 6291710,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 6291710,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x54",
+            "subCategoryId": "0xcd",
+            "type": 0
+        },
+        "Material4": {
+            "categoryId": "0xb6",
+            "fillColor": 10550784,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 10550784,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x51",
+            "subCategoryId": "0xb7",
+            "texture": {
+                "name": "0x4f",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            1.4184397163120568,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -3.2986970146792021,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material5": {
+            "categoryId": "0xce",
+            "fillColor": 11579568,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 11579568,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xcf",
+            "type": 0
+        },
+        "Material6": {
+            "categoryId": "0xb6",
+            "fillColor": 10550784,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 10550784,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x51",
+            "subCategoryId": "0xb7",
+            "texture": {
+                "name": "0x4f",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            1.4184397163120568,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -3.2986970146792021,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material7": {
+            "categoryId": "0xba",
+            "fillColor": 14803200,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 14803200,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x71",
+            "subCategoryId": "0xbb",
+            "texture": {
+                "name": "0x70",
+                "params": {
+                    "mode": 0,
+                    "transform": [
+                        [
+                            1.3333333333333333,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -2.2831675753673619,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        },
+        "Material8": {
+            "categoryId": "0xd2",
+            "fillColor": 14803425,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 14803425,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "subCategoryId": "0xd3",
+            "type": 0
+        },
+        "Material9": {
+            "categoryId": "0xb6",
+            "fillColor": 10550784,
+            "fillFlags": 0,
+            "ignoreLighting": false,
+            "lineColor": 10550784,
+            "linePixels": 0,
+            "lineWidth": 1,
+            "materialId": "0x51",
+            "subCategoryId": "0xb7",
+            "texture": {
+                "name": "0x4f",
+                "params": {
+                    "mode": 2,
+                    "transform": [
+                        [
+                            1.4184397163120568,
+                            0.0,
+                            0.0
+                        ],
+                        [
+                            0.0,
+                            -3.2986970146792021,
+                            0.0
+                        ]
+                    ],
+                    "weight": 1.0,
+                    "worldMapping": true
+                }
+            },
+            "type": 0
+        }
+    },
+    "meshes": {
+        "Mesh_Root": {
+            "primitives": [
+                {
+                    "isPlanar": false,
+                    "material": "Material0",
+                    "surface": {
+                        "indices": "bvindices0Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex0",
+                        "count": 10499,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 203,
+                        "materialAtlas": {
+                            "hasTranslucency": false,
+                            "numMaterials": 5,
+                            "overridesAlpha": true
+                        },
+                        "numColors": 7,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "width": 208
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material1",
+                    "surface": {
+                        "indices": "bvindices1Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                6.6112229596143306e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                3.8908622426208882e-05,
+                                0.0,
+                                -2.1663324832916260,
+                                -1.2135245800018311,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                2.1663324832916260,
+                                1.3363519906997681
+                            ],
+                            "decodedMin": [
+                                -2.1663324832916260,
+                                -1.2135245800018311
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex1",
+                        "count": 148,
+                        "featureID": 1,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16711680,
+                        "width": 592
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material2",
+                    "surface": {
+                        "indices": "bvindices2Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00014165581577819372,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00015555812736447785,
+                                0.0,
+                                -9.2834138870239258,
+                                -10.194501876831055,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                0.0,
+                                1.7763568394002505e-15
+                            ],
+                            "decodedMin": [
+                                -9.2834138870239258,
+                                -10.194501876831055
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex2",
+                        "count": 26,
+                        "featureID": 3,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 30177,
+                        "width": 104
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material3",
+                    "surface": {
+                        "indices": "bvindices3Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex3",
+                        "count": 18,
+                        "featureID": 6,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 6291710,
+                        "width": 72
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material4",
+                    "surface": {
+                        "indices": "bvindices4Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00046888103908574613,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00056849030232533192,
+                                0.0,
+                                -15.364059448242188,
+                                -18.687705993652344,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                15.364059448242184,
+                                18.568305969238281
+                            ],
+                            "decodedMin": [
+                                -15.364059448242188,
+                                -18.687705993652344
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex4",
+                        "count": 128,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 10550784,
+                        "width": 512
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material5",
+                    "surface": {
+                        "indices": "bvindices5Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex5",
+                        "count": 971,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "materialAtlas": {
+                            "hasTranslucency": false,
+                            "numMaterials": 3,
+                            "overridesAlpha": true
+                        },
+                        "numColors": 2,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "width": 3898
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material6",
+                    "surface": {
+                        "indices": "bvindices6Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00046448297574098644,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00030684150255744149,
+                                0.0,
+                                -15.219945907592773,
+                                -1.5405519008636475,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                15.219945907592773,
+                                18.568305969238281
+                            ],
+                            "decodedMin": [
+                                -15.219945907592773,
+                                -1.5405519008636475
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex6",
+                        "count": 48,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 10550784,
+                        "width": 192
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material7",
+                    "surface": {
+                        "indices": "bvindices7Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                1.9663222605352443e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                4.4586147879666521e-06,
+                                0.0,
+                                0.0,
+                                -13.628227233886719,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                1.2886292934417725,
+                                -13.336031913757324
+                            ],
+                            "decodedMin": [
+                                0.0,
+                                -13.628227233886719
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex7",
+                        "count": 4,
+                        "featureID": 5,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 14803200,
+                        "width": 16
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material8",
+                    "surface": {
+                        "indices": "bvindices8Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex8",
+                        "count": 30,
+                        "featureID": 13,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 14803425,
+                        "width": 120
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material9",
+                    "surface": {
+                        "indices": "bvindices9Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00044835245544708343,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00056337627382657522,
+                                0.0,
+                                -14.691389083862305,
+                                -18.352558135986328,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                14.691389083862308,
+                                18.568305969238281
+                            ],
+                            "decodedMin": [
+                                -14.691389083862305,
+                                -18.352558135986328
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex9",
+                        "count": 48,
+                        "featureID": 15,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 10550784,
+                        "width": 192
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material10",
+                    "surface": {
+                        "indices": "bvindices10Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex10",
+                        "count": 20,
+                        "featureID": 17,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 14803425,
+                        "width": 80
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material11",
+                    "surface": {
+                        "indices": "bvindices11Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex11",
+                        "count": 15,
+                        "featureID": 55,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 30177,
+                        "width": 60
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material12",
+                    "surface": {
+                        "indices": "bvindices12Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                6.4716941569811372e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                3.6708528447807846e-05,
+                                0.0,
+                                -2.1206123828887939,
+                                -1.1672770977020264,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                2.1206123828887939,
+                                1.2384163141250610
+                            ],
+                            "decodedMin": [
+                                -2.1206123828887939,
+                                -1.1672770977020264
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex12",
+                        "count": 98,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16711680,
+                        "width": 392
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material13",
+                    "surface": {
+                        "indices": "bvindices13Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                8.2022423255613658e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00018984686276037196,
+                                0.0,
+                                10.700170516967773,
+                                -27.517419815063477,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                16.075510025024414,
+                                -15.07580566406250
+                            ],
+                            "decodedMin": [
+                                10.700170516967773,
+                                -27.517419815063477
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex13",
+                        "count": 24,
+                        "featureID": 7,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16711680,
+                        "width": 96
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material14",
+                    "surface": {
+                        "indices": "bvindices14Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00017081414424482668,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00014917173638099698,
+                                0.0,
+                                -7.0103998184204102,
+                                -8.5600948333740234,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                4.1839051246643066,
+                                1.2158749103546143
+                            ],
+                            "decodedMin": [
+                                -7.0103998184204102,
+                                -8.5600948333740234
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex14",
+                        "count": 14,
+                        "featureID": 9,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 30177,
+                        "width": 56
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material15",
+                    "surface": {
+                        "indices": "bvindices15Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex15",
+                        "count": 2281,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 96,
+                        "materialAtlas": {
+                            "hasTranslucency": false,
+                            "numMaterials": 5,
+                            "overridesAlpha": true
+                        },
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16777215,
+                        "width": 96
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material16",
+                    "surface": {
+                        "indices": "bvindices16Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex16",
+                        "count": 298,
+                        "featureID": 54,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16711680,
+                        "width": 1192
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material17",
+                    "surface": {
+                        "indices": "bvindices17Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00018219127438203974,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00021668816354951972,
+                                0.0,
+                                -9.9812877147470447e-13,
+                                -1.0,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                11.939905166625977,
+                                13.200658798217775
+                            ],
+                            "decodedMin": [
+                                -9.9812877147470447e-13,
+                                -1.0
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex17",
+                        "count": 2511,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 97,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16777215,
+                        "width": 104
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material18",
+                    "surface": {
+                        "indices": "bvindices18Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.00077413214219828859,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0017773068923467067,
+                                0.0,
+                                -25.366374969482422,
+                                -42.717514038085938,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                25.366374969482422,
+                                73.758293151855483
+                            ],
+                            "decodedMin": [
+                                -25.366374969482422,
+                                -42.717514038085938
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex18",
+                        "count": 320,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16777215,
+                        "width": 1280
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material19",
+                    "surface": {
+                        "indices": "bvindices19Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                3.1352874442697384e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                4.4278071857457341e-05,
+                                0.0,
+                                0.0,
+                                -5.1032438278198242,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                2.0547106266021729,
+                                -2.2014803886413574
+                            ],
+                            "decodedMin": [
+                                0.0,
+                                -5.1032438278198242
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex19",
+                        "count": 27,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16777215,
+                        "width": 108
+                    }
+                },
+                {
+                    "isPlanar": false,
+                    "material": "Material20",
+                    "surface": {
+                        "indices": "bvindices20Surface",
+                        "type": 3,
+                        "uvParams": {
+                            "decodeMatrix": [
+                                0.0015968828004112486,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00072155297098111038,
+                                0.0,
+                                -56.285850524902344,
+                                -23.701755523681641,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                48.365863800048828,
+                                23.585218429565430
+                            ],
+                            "decodedMin": [
+                                -56.285850524902344,
+                                -23.701755523681641
+                            ]
+                        }
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex20",
+                        "count": 2396,
+                        "featureID": 35,
+                        "featureIndexType": 1,
+                        "hasTranslucency": false,
+                        "height": 96,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "uniformColor": 16777215,
+                        "width": 100
+                    }
+                },
+                {
+                    "indices": "bvindices21",
+                    "isPlanar": false,
+                    "material": "Material21",
+                    "nextIndicesAndParams": "bvnextIndicesAndParams21",
+                    "prevIndices": "bvprevIndices21",
+                    "type": 1,
+                    "vertices": {
+                        "bufferView": "bvVertex21",
+                        "count": 7,
+                        "featureIndexType": 2,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 2,
+                        "numRgbaPerVertex": 3,
+                        "params": {
+                            "decodeMatrix": [
+                                0.00010027553320116588,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019035082524317489,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.00019040834775898552,
+                                0.0,
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                -6.5715570683384055,
+                                12.474641332311467,
+                                6.2392055351925571
+                            ],
+                            "decodedMin": [
+                                -13.143114136676811,
+                                0.0,
+                                -6.2392055351925588
+                            ]
+                        },
+                        "width": 23
+                    }
+                },
+                {
+                    "instances": {
+                        "count": 6,
+                        "featureIds": "bvInstanceFeatures22",
+                        "transformCenter": [
+                            -8.8217298879084929,
+                            4.1323363165316183,
+                            -4.8984581527584563
+                        ],
+                        "transforms": "bvInstanceTransforms22"
+                    },
+                    "isPlanar": false,
+                    "material": "Material22",
+                    "surface": {
+                        "indices": "bvindices22Surface",
+                        "type": 1
+                    },
+                    "type": 0,
+                    "vertices": {
+                        "bufferView": "bvVertex22",
+                        "count": 24,
+                        "featureIndexType": 0,
+                        "hasTranslucency": false,
+                        "height": 1,
+                        "numColors": 0,
+                        "numRgbaPerVertex": 4,
+                        "params": {
+                            "decodeMatrix": [
+                                6.6177645561821173e-06,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                1.9378957808839696e-07,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                2.3184388328266594e-05,
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0,
+                                1.0
+                            ],
+                            "decodedMax": [
+                                0.43369520018939506,
+                                0.012700000000023096,
+                                1.5193888890929512
+                            ],
+                            "decodedMin": [
+                                0.0,
+                                0.0,
+                                0.0
+                            ]
+                        },
+                        "uniformColor": 60,
+                        "width": 96
+                    }
+                }
+            ]
+        }
+    },
+    "namedTextures": {
+        "0x4f": {
+            "bufferView": "0x4f",
+            "format": 0,
+            "height": 172,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 400
+        },
+        "0x59": {
+            "bufferView": "0x59",
+            "format": 0,
+            "height": 1281,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 1372
+        },
+        "0x5e": {
+            "bufferView": "0x5e",
+            "format": 0,
+            "height": 365,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 350
+        },
+        "0x6e": {
+            "bufferView": "0x6e",
+            "format": 0,
+            "height": 600,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 1500
+        },
+        "0x70": {
+            "bufferView": "0x70",
+            "format": 0,
+            "height": 299,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 512
+        },
+        "0x8d": {
+            "bufferView": "0x8d",
+            "format": 0,
+            "height": 320,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 512
+        },
+        "0xab": {
+            "bufferView": "0xab",
+            "format": 0,
+            "height": 729,
+            "isGlyph": false,
+            "isTileSection": false,
+            "width": 349
+        }
+    },
+    "nodes": {
+        "Node_Root": "Mesh_Root"
+    },
+    "renderMaterials": {
+        "0x51": {
+            "ambient": 0.50,
+            "diffuse": 0.50,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.020,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.43122100000000002,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x4f",
+                    "params": {
+                        "mode": 2,
+                        "transform": [
+                            [
+                                1.4184397163120568,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                -3.2986970146792021,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0x54": {
+            "ambient": 1.0,
+            "diffuse": 0.79000000000000004,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.0,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.38610,
+            "transparency": 0.0
+        },
+        "0x5a": {
+            "ambient": 1.0,
+            "diffuse": 0.65000000000000002,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.010,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.400590,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x59",
+                    "params": {
+                        "mode": 2,
+                        "transform": [
+                            [
+                                0.20000000000000001,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                -0.21420766619248230,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0x61": {
+            "ambient": 1.0,
+            "diffuse": 0.81999999999999995,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.029999999999999999,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 5.2808060000000001,
+            "transparency": 0.0
+        },
+        "0x6d": {
+            "ambient": 0.0,
+            "diffuse": 0.59999999999999998,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.0,
+            "refract": 1.50,
+            "shadows": true,
+            "specular": 0.20000000000000001,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.80667800000000001,
+            "transparency": 0.58999999999999997
+        },
+        "0x6f": {
+            "ambient": 0.0,
+            "diffuse": 0.50,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.0,
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.20000000000000001,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.80667800000000001,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x6e",
+                    "params": {
+                        "mode": 2,
+                        "transform": [
+                            [
+                                3.0030030030030028,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                -7.5075075075075066,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0x71": {
+            "ambient": 1.0,
+            "diffuse": 0.50,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.029999999999999999,
+            "reflectColor": [
+                0.96078399999999997,
+                0.98823499999999997,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.10000000000000001,
+            "specularColor": [
+                0.96078399999999997,
+                0.98823499999999997,
+                1.0
+            ],
+            "specularExponent": 4.7282000000000002,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x70",
+                    "params": {
+                        "mode": 0,
+                        "transform": [
+                            [
+                                1.3333333333333333,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                -2.2831675753673619,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0x72": {
+            "ambient": 1.0,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.15000000000000002,
+            "reflectColor": [
+                0.92941200000000002,
+                0.92941200000000002,
+                0.92941200000000002
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.050000000000000003,
+            "specularColor": [
+                0.92941200000000002,
+                0.92941200000000002,
+                0.92941200000000002
+            ],
+            "specularExponent": 13.264786000000001,
+            "transparency": 0.880
+        },
+        "0x90": {
+            "ambient": 1.0,
+            "diffuse": 0.20000000000000001,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.0,
+            "reflectColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.0,
+            "specularColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "specularExponent": 0.38610,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x8d",
+                    "params": {
+                        "mode": 0,
+                        "transform": [
+                            [
+                                -1.8369701987210297e-16,
+                                -1.0,
+                                0.0
+                            ],
+                            [
+                                -1.6000000000000001,
+                                2.9391523179536476e-16,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0xad": {
+            "ambient": 1.0,
+            "diffuse": 0.40999999999999998,
+            "diffuseColor": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "reflect": 0.0012499499999999999,
+            "reflectColor": [
+                1.0,
+                0.96862700000000002,
+                0.98039200000000004
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.14999999999999999,
+            "specularColor": [
+                1.0,
+                0.96862700000000002,
+                0.98039200000000004
+            ],
+            "specularExponent": 2.4361000000000002,
+            "textureMapping": {
+                "texture": {
+                    "name": "0x5e",
+                    "params": {
+                        "mode": 0,
+                        "transform": [
+                            [
+                                4.8985871965894128e-16,
+                                8.0,
+                                0.0
+                            ],
+                            [
+                                7.6712412835520913,
+                                -4.6972805416945509e-16,
+                                0.0
+                            ]
+                        ],
+                        "weight": 1.0,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        },
+        "0xb0": {
+            "ambient": 0.0,
+            "diffuse": 0.50,
+            "diffuseColor": [
+                0.90196100000000001,
+                0.78823500000000002,
+                0.63137299999999996
+            ],
+            "reflectColor": [
+                0.98823499999999997,
+                0.96470599999999995,
+                0.94117600000000001
+            ],
+            "refract": 1.0,
+            "shadows": true,
+            "specular": 0.050000000000000003,
+            "specularColor": [
+                0.98823499999999997,
+                0.96470599999999995,
+                0.94117600000000001
+            ],
+            "specularExponent": 0.400590,
+            "textureMapping": {
+                "texture": {
+                    "name": "0xab",
+                    "params": {
+                        "mode": 2,
+                        "transform": [
+                            [
+                                3.0616169978683826e-16,
+                                5.0,
+                                0.0
+                            ],
+                            [
+                                2.3936902325470060,
+                                -1.4657125407194873e-16,
+                                0.0
+                            ]
+                        ],
+                        "weight": 0.69999999999999996,
+                        "worldMapping": true
+                    }
+                }
+            },
+            "transparency": 0.0
+        }
+    },
+    "scene": "defaultScene",
+    "scenes": {
+        "defaultScene": {
+            "nodes": [
+                "rootNode"
+            ]
+        }
+    }
+}
