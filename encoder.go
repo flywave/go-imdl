@@ -3,11 +3,9 @@ package imdl
 import (
 	"encoding/binary"
 	"encoding/json"
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/flywave/gltf"
 )
@@ -64,32 +62,7 @@ func (e *Encoder) Encode(doc *Document) error {
 		return err
 	}
 
-	for k := range doc.Buffers {
-		buffer := doc.Buffers[k]
-		if len(buffer.Data) == 0 || buffer.IsEmbeddedResource() {
-			continue
-		}
-		if err = e.encodeBuffer(buffer); err != nil {
-			return err
-		}
-	}
-
 	return err
-}
-
-func (e *Encoder) encodeBuffer(buffer *gltf.Buffer) error {
-	if err := validateBufferURI(buffer.URI); err != nil {
-		return err
-	}
-
-	return e.WriteHandler.WriteResource(buffer.URI, buffer.Data)
-}
-
-func validateBufferURI(uri string) error {
-	if uri == "" || strings.Contains(uri, "..") || strings.HasPrefix(uri, "/") || strings.HasPrefix(uri, "\\") {
-		return fmt.Errorf("gltf: Invalid buffer.uri value '%s'", uri)
-	}
-	return nil
 }
 
 func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
@@ -97,7 +70,7 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	jsonHeader := chunkHeader{
+	jsonHeader := JSONHeader{
 		Length: uint32(((len(jsonText) + 3) / 4) * 4),
 		Type:   glbChunkJSON,
 	}
@@ -112,14 +85,14 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 		headerPadding[i] = ' '
 	}
 
-	var firstBuffers *gltf.Buffer
+	var firstBuffers *Buffer
 
 	for k := range doc.Buffers {
 		firstBuffers = doc.Buffers[k]
 		break
 	}
 
-	hasBinChunk := len(doc.Buffers) > 0 && firstBuffers.URI == ""
+	hasBinChunk := len(doc.Buffers) > 0
 	var binPaddedLength uint32
 	if hasBinChunk {
 		binPaddedLength = ((firstBuffers.ByteLength + 3) / 4) * 4
@@ -134,37 +107,8 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 	e.w.Write(headerPadding)
 
 	if hasBinChunk {
-		binBuffer := firstBuffers
-		binPadding := make([]byte, binPaddedLength-binBuffer.ByteLength)
-		for i := range binPadding {
-			binPadding[i] = 0
-		}
-		binHeader := chunkHeader{Length: binPaddedLength, Type: glbChunkBIN}
-		binary.Write(e.w, binary.LittleEndian, &binHeader)
-		e.w.Write(binBuffer.Data)
-		_, err = e.w.Write(binPadding)
+
 	}
 
 	return hasBinChunk, err
-}
-
-func (p *Mesh) UnmarshalJSON(data []byte) error {
-	type alias Mesh
-	tmp := alias(Mesh{})
-	err := json.Unmarshal(data, &tmp)
-	if err == nil {
-		*p = Mesh(tmp)
-	}
-	return err
-}
-
-func (p *Mesh) MarshalJSON() ([]byte, error) {
-	type alias Mesh
-	tmp := &struct {
-		alias
-	}{
-		alias: (alias)(*p),
-	}
-
-	return json.Marshal(tmp)
 }

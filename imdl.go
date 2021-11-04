@@ -1,6 +1,10 @@
 package imdl
 
-import "github.com/flywave/gltf"
+import (
+	"encoding/json"
+
+	"github.com/flywave/gltf"
+)
 
 type FeatureIndexType uint32
 
@@ -13,9 +17,9 @@ const (
 type PrimitiveType uint32
 
 const (
-	_Mesh     PrimitiveType = 0
-	_Polyline PrimitiveType = 1
-	_Point    PrimitiveType = 2
+	PT_Mesh     PrimitiveType = 0
+	PT_Polyline PrimitiveType = 1
+	PT_Point    PrimitiveType = 2
 )
 
 type MaterialAtlas struct {
@@ -202,12 +206,150 @@ type PointStringPrimitive struct {
 }
 
 type Mesh struct {
-	Primitives []interface{} `json:"primitives,omitempty"`
-	Layer      string        `json:"layer,omitempty"`
+	Primitives interface{} `json:"primitives,omitempty"`
+	Layer      string      `json:"layer,omitempty"`
+}
+
+func (p *Mesh) UnmarshalJSON(data []byte) error {
+	type _mesh struct {
+		Primitives []struct {
+			Type interface{} `json:"type,omitempty"`
+		} `json:"primitives,omitempty"`
+		Layer string `json:"layer,omitempty"`
+	}
+	var m _mesh
+	err := json.Unmarshal(data, &m)
+	if err != nil {
+		return err
+	}
+
+	if len(m.Primitives) > 0 {
+		if t, ok := m.Primitives[0].Type.(string); ok && t == "areaPattern" {
+			type a_mesh struct {
+				Primitives []AreaPattern `json:"primitives,omitempty"`
+				Layer      string        `json:"layer,omitempty"`
+			}
+			var m a_mesh
+			err := json.Unmarshal(data, &m)
+			if err != nil {
+				return err
+			}
+			p.Primitives = m.Primitives
+			p.Layer = m.Layer
+		} else if t, ok := m.Primitives[0].Type.(float64); ok {
+			switch PrimitiveType(t) {
+			case PT_Mesh:
+				type m_mesh struct {
+					Primitives []MeshPrimitive `json:"primitives,omitempty"`
+					Layer      string          `json:"layer,omitempty"`
+				}
+				var m m_mesh
+				err := json.Unmarshal(data, &m)
+				if err != nil {
+					return err
+				}
+				p.Primitives = m.Primitives
+				p.Layer = m.Layer
+			case PT_Polyline:
+				type p_mesh struct {
+					Primitives []PolylinePrimitive `json:"primitives,omitempty"`
+					Layer      string              `json:"layer,omitempty"`
+				}
+				var m p_mesh
+				err := json.Unmarshal(data, &m)
+				if err != nil {
+					return err
+				}
+				p.Primitives = m.Primitives
+				p.Layer = m.Layer
+			case PT_Point:
+				type p_mesh struct {
+					Primitives []PointStringPrimitive `json:"primitives,omitempty"`
+					Layer      string                 `json:"layer,omitempty"`
+				}
+				var m p_mesh
+				err := json.Unmarshal(data, &m)
+				if err != nil {
+					return err
+				}
+				p.Primitives = m.Primitives
+				p.Layer = m.Layer
+			}
+		}
+	}
+
+	return nil
+}
+
+type Buffer struct {
+	Extensions gltf.Extensions `json:"extensions,omitempty"`
+	Extras     interface{}     `json:"extras,omitempty"`
+	Name       string          `json:"name,omitempty"`
+	ByteLength uint32          `json:"byteLength" validate:"required"`
+}
+
+type BufferView struct {
+	Extensions gltf.Extensions `json:"extensions,omitempty"`
+	Extras     interface{}     `json:"extras,omitempty"`
+	Buffer     string          `json:"buffer"`
+	ByteOffset uint32          `json:"byteOffset,omitempty"`
+	ByteLength uint32          `json:"byteLength" validate:"required"`
+	ByteStride uint32          `json:"byteStride,omitempty" validate:"omitempty,gte=4,lte=252"`
 }
 
 type AreaPatternSymbol struct {
-	Primitives []interface{} `json:"primitives,omitempty"`
+	Primitives interface{} `json:"primitives,omitempty"`
+}
+
+func (p *AreaPatternSymbol) UnmarshalJSON(data []byte) error {
+	type _mesh struct {
+		Primitives []struct {
+			Type PrimitiveType `json:"type,omitempty"`
+		} `json:"primitives,omitempty"`
+	}
+	var m _mesh
+	err := json.Unmarshal(data, &m)
+	if err != nil {
+		return err
+	}
+	if len(m.Primitives) > 0 {
+		switch m.Primitives[0].Type {
+		case PT_Mesh:
+			type m_mesh struct {
+				Primitives []MeshPrimitive `json:"primitives,omitempty"`
+				Layer      string          `json:"layer,omitempty"`
+			}
+			var m m_mesh
+			err := json.Unmarshal(data, &m)
+			if err != nil {
+				return err
+			}
+			p.Primitives = m.Primitives
+		case PT_Polyline:
+			type p_mesh struct {
+				Primitives []PolylinePrimitive `json:"primitives,omitempty"`
+				Layer      string              `json:"layer,omitempty"`
+			}
+			var m p_mesh
+			err := json.Unmarshal(data, &m)
+			if err != nil {
+				return err
+			}
+			p.Primitives = m.Primitives
+		case PT_Point:
+			type p_mesh struct {
+				Primitives []PointStringPrimitive `json:"primitives,omitempty"`
+				Layer      string                 `json:"layer,omitempty"`
+			}
+			var m p_mesh
+			err := json.Unmarshal(data, &m)
+			if err != nil {
+				return err
+			}
+			p.Primitives = m.Primitives
+		}
+	}
+	return nil
 }
 
 type RenderTexture struct {
@@ -222,23 +364,23 @@ type RenderTexture struct {
 type TextureMappingMode int32
 
 const (
-	TM_Cubic            TextureMappingMode = 4
-	TM_Cylindrical      TextureMappingMode = 6
-	TM_DirectionalDrape TextureMappingMode = 3
-	TM_ElevationDrape   TextureMappingMode = 1
-	TM_FrontProject     TextureMappingMode = 8
 	TM_None             TextureMappingMode = -1
 	TM_Parametric       TextureMappingMode = 0
+	TM_ElevationDrape   TextureMappingMode = 1
 	TM_Planar           TextureMappingMode = 2
-	TM_Solid            TextureMappingMode = 7
+	TM_DirectionalDrape TextureMappingMode = 3
+	TM_Cubic            TextureMappingMode = 4
 	TM_Spherical        TextureMappingMode = 5
+	TM_Cylindrical      TextureMappingMode = 6
+	TM_Solid            TextureMappingMode = 7
+	TM_FrontProject     TextureMappingMode = 8
 )
 
 type Texture struct {
 	Name   string `json:"name"`
 	Params struct {
-		mode          TextureMappingMode `json:"mode"`
-		textureMatrix [][3]float64       `json:"transform"`
+		Mode          TextureMappingMode `json:"mode"`
+		TextureMatrix [][3]float64       `json:"transform"`
 		Weight        float64            `json:"weight"`
 		WorldMapping  bool               `json:"worldMapping"`
 	} `json:"params"`
@@ -285,17 +427,18 @@ type Material struct {
 }
 
 type Document struct {
-	ExtensionsUsed   []string                    `json:"extensionsUsed,omitempty"`
-	GLExtensionsUsed []string                    `json:"glExtensionsUsed,omitempty"`
-	Buffers          map[string]*gltf.Buffer     `json:"buffers,omitempty" validate:"dive"`
-	BufferViews      map[string]*gltf.BufferView `json:"bufferViews,omitempty" validate:"dive"`
-	Materials        map[string]*Material        `json:"materials,omitempty" validate:"dive"`
-	Meshes           map[string]*Mesh            `json:"meshes,omitempty" validate:"dive"`
-	Nodes            map[string]string           `json:"nodes,omitempty" validate:"dive"`
-	Scene            *string                     `json:"scene,omitempty"`
-	Scenes           map[string]*Scene           `json:"scenes,omitempty" validate:"dive"`
-	NamedTextures    map[string]*RenderTexture   `json:"namedTextures,omitempty" validate:"dive"`
-	RenderMaterials  map[string]*RenderMaterial  `json:"renderMaterials,omitempty" validate:"dive"`
+	ExtensionsUsed   []string                   `json:"extensionsUsed,omitempty"`
+	GLExtensionsUsed []string                   `json:"glExtensionsUsed,omitempty"`
+	Buffers          map[string]*Buffer         `json:"buffers,omitempty" validate:"dive"`
+	BufferViews      map[string]*BufferView     `json:"bufferViews,omitempty" validate:"dive"`
+	Materials        map[string]*Material       `json:"materials,omitempty" validate:"dive"`
+	Meshes           map[string]*Mesh           `json:"meshes,omitempty" validate:"dive"`
+	Nodes            map[string]string          `json:"nodes,omitempty" validate:"dive"`
+	Scene            *string                    `json:"scene,omitempty"`
+	Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
+	NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
+	RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
+	Data             []byte                     `json:"-"`
 }
 
 func newString(s string) *string {
@@ -305,6 +448,6 @@ func newString(s string) *string {
 func NewDocument() *Document {
 	return &Document{
 		Scene:  newString("defaultScene"),
-		Scenes: map[string]*Scene{"defaultScene": &Scene{Nodes: []string{"rootNode"}}},
+		Scenes: map[string]*Scene{"defaultScene": {Nodes: []string{"rootNode"}}},
 	}
 }
