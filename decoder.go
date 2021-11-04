@@ -61,18 +61,21 @@ func (d *Decoder) Decode(doc *Document) error {
 		return err
 	}
 
-	var externalBufferIndex = 0
 	if isBinary && len(doc.Buffers) > 0 {
-		externalBufferIndex = 1
-		if err := d.decodeBinaryBuffer(doc.Buffers[0]); err != nil {
-			return err
+		for k := range doc.Buffers {
+			if err := d.decodeBinaryBuffer(doc.Buffers[k]); err != nil {
+				return err
+			}
+			break
+		}
+	} else {
+		for k := range doc.Buffers {
+			if err := d.decodeBuffer(doc.Buffers[k]); err != nil {
+				return err
+			}
 		}
 	}
-	for i := externalBufferIndex; i < len(doc.Buffers); i++ {
-		if err := d.decodeBuffer(doc.Buffers[i]); err != nil {
-			return err
-		}
-	}
+
 	return nil
 }
 

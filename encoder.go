@@ -55,13 +55,8 @@ func (e *Encoder) WithWriteHandler(h gltf.WriteHandler) *Encoder {
 
 func (e *Encoder) Encode(doc *Document) error {
 	var err error
-	var externalBufferIndex = 0
 	if e.AsBinary {
-		var hasBinChunk bool
-		hasBinChunk, err = e.encodeBinary(doc)
-		if hasBinChunk {
-			externalBufferIndex = 1
-		}
+		_, err = e.encodeBinary(doc)
 	} else {
 		err = json.NewEncoder(e.w).Encode(doc)
 	}
@@ -69,8 +64,8 @@ func (e *Encoder) Encode(doc *Document) error {
 		return err
 	}
 
-	for i := externalBufferIndex; i < len(doc.Buffers); i++ {
-		buffer := doc.Buffers[i]
+	for k := range doc.Buffers {
+		buffer := doc.Buffers[k]
 		if len(buffer.Data) == 0 || buffer.IsEmbeddedResource() {
 			continue
 		}
@@ -109,7 +104,7 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 	header := glbHeader{
 		Magic:      glbHeaderMagic,
 		Version:    2,
-		Length:     12 + 8 + jsonHeader.Length, // 12-byte glb header + 8-byte json chunk header
+		Length:     12 + 8 + jsonHeader.Length,
 		JSONHeader: jsonHeader,
 	}
 	headerPadding := make([]byte, header.JSONHeader.Length-uint32(len(jsonText)))
@@ -117,10 +112,17 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 		headerPadding[i] = ' '
 	}
 
-	hasBinChunk := len(doc.Buffers) > 0 && doc.Buffers[0].URI == ""
+	var firstBuffers *gltf.Buffer
+
+	for k := range doc.Buffers {
+		firstBuffers = doc.Buffers[k]
+		break
+	}
+
+	hasBinChunk := len(doc.Buffers) > 0 && firstBuffers.URI == ""
 	var binPaddedLength uint32
 	if hasBinChunk {
-		binPaddedLength = ((doc.Buffers[0].ByteLength + 3) / 4) * 4
+		binPaddedLength = ((firstBuffers.ByteLength + 3) / 4) * 4
 		header.Length += uint32(8) + binPaddedLength
 	}
 
@@ -132,7 +134,7 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 	e.w.Write(headerPadding)
 
 	if hasBinChunk {
-		binBuffer := doc.Buffers[0]
+		binBuffer := firstBuffers
 		binPadding := make([]byte, binPaddedLength-binBuffer.ByteLength)
 		for i := range binPadding {
 			binPadding[i] = 0
