@@ -73,7 +73,7 @@ func newSimpleBuilder(vertexCount int) *SimpleBuilder {
 }
 
 func (b *SimpleBuilder) AppendVertex(v *SimpleVertex) {
-	b.AppendQuantizedPosition(v.Pos)
+	b.AppendQuantizedPosition(v.QPos)
 	b.AppendColorIndex(v.ColorIndex)
 	b.AppendFeatureIndex(v.FeatureIndex)
 }
@@ -183,10 +183,10 @@ func newTexturedMeshBuilder(vertexCount int) *TexturedMeshBuilder {
 }
 
 func (b *TexturedMeshBuilder) AppendVertex(v *MeshVertex) {
-	b.AppendQuantizedPosition(v.Pos)
+	b.AppendQuantizedPosition(v.QPos)
 	b.Advance(2)
 	b.AppendFeatureIndex(v.FeatureIndex)
-	b.AppendUV(v.UV)
+	b.AppendUV(v.QUV)
 }
 
 func (b *TexturedMeshBuilder) Process(vertexs []MeshVertex) {
@@ -214,10 +214,10 @@ func (b *TexturedLitMeshBuilder) AppendNormal(normal *uint16) {
 	}
 }
 func (b *TexturedLitMeshBuilder) AppendVertex(v *MeshVertex) {
-	b.AppendQuantizedPosition(v.Pos)
-	b.AppendNormal(v.Normals)
+	b.AppendQuantizedPosition(v.QPos)
+	b.AppendNormal(v.OctEncodedNormal)
 	b.AppendFeatureIndex(v.FeatureIndex)
-	b.AppendUV(v.UV)
+	b.AppendUV(v.QUV)
 }
 
 func (b *TexturedLitMeshBuilder) Process(vertexs []MeshVertex) {
@@ -239,7 +239,7 @@ func newLitMeshBuilder(vertexCount int) *LitMeshBuilder {
 
 func (b *LitMeshBuilder) AppendVertex(v *MeshVertex) {
 	b.BaseMeshBuilder.SimpleBuilder.AppendVertex(&v.SimpleVertex)
-	b.Append16(*v.Normals)
+	b.Append16(*v.OctEncodedNormal)
 	b.Advance(2)
 }
 

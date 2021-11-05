@@ -78,7 +78,7 @@ func (e *Encoder) encodeBinary(doc *Document) error {
 	}
 	header := glbHeader{
 		Magic:      glbHeaderMagic,
-		Version:    2,
+		Version:    1,
 		Length:     12 + 8 + jsonHeader.Length,
 		JSONHeader: jsonHeader,
 	}

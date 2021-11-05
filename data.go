@@ -2,8 +2,10 @@ package imdl
 
 type MeshVertex struct {
 	SimpleVertex
-	UV      *[2]uint16
-	Normals *uint16
+	UV               *[2]float32
+	QUV              *[2]uint16
+	Normal           *[3]float32
+	OctEncodedNormal *uint16
 }
 
 type MeshData struct {
@@ -36,7 +38,8 @@ func (d *MeshData) DecodeVertexs(data []byte, count uint32) {
 }
 
 type SimpleVertex struct {
-	Pos          [3]uint16
+	Pos          [3]float32
+	QPos         [3]uint16
 	ColorIndex   *uint16
 	FeatureIndex *uint32
 }

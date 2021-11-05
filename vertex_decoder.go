@@ -88,7 +88,7 @@ func (d *SimpleDecoder) Next() *SimpleVertex {
 	}
 	curIndex := d.curIndex
 	v := &SimpleVertex{ColorIndex: new(uint16), FeatureIndex: new(uint32)}
-	curIndex = d.DecodeQuantizedPosition(curIndex, &v.Pos)
+	curIndex = d.DecodeQuantizedPosition(curIndex, &v.QPos)
 	curIndex = d.DecodeColorIndex(curIndex, v.ColorIndex)
 	curIndex = d.DecodeFeatureIndex(curIndex, v.FeatureIndex)
 	if curIndex < len(d.data) {
@@ -148,11 +148,11 @@ func (d *TexturedMeshDecoder) Next() *MeshVertex {
 		return nil
 	}
 	curIndex := d.curIndex
-	v := &MeshVertex{SimpleVertex: SimpleVertex{FeatureIndex: new(uint32)}, UV: &[2]uint16{}}
-	curIndex = d.DecodeQuantizedPosition(curIndex, &v.Pos)
+	v := &MeshVertex{SimpleVertex: SimpleVertex{FeatureIndex: new(uint32)}, QUV: &[2]uint16{}}
+	curIndex = d.DecodeQuantizedPosition(curIndex, &v.QPos)
 	curIndex += 2
 	curIndex = d.DecodeFeatureIndex(curIndex, v.FeatureIndex)
-	curIndex = d.DecodeUV(curIndex, v.UV)
+	curIndex = d.DecodeUV(curIndex, v.QUV)
 	if curIndex < len(d.data) {
 		d.curIndex = curIndex
 	} else {
@@ -183,11 +183,11 @@ func (d *TexturedLitMeshDecoder) Next() *MeshVertex {
 		return nil
 	}
 	curIndex := d.curIndex
-	v := &MeshVertex{SimpleVertex: SimpleVertex{FeatureIndex: new(uint32)}, Normals: new(uint16), UV: &[2]uint16{}}
-	curIndex = d.DecodeQuantizedPosition(curIndex, &v.Pos)
-	curIndex = d.DecodeNormal(curIndex, v.Normals)
+	v := &MeshVertex{SimpleVertex: SimpleVertex{FeatureIndex: new(uint32)}, OctEncodedNormal: new(uint16), QUV: &[2]uint16{}}
+	curIndex = d.DecodeQuantizedPosition(curIndex, &v.QPos)
+	curIndex = d.DecodeNormal(curIndex, v.OctEncodedNormal)
 	curIndex = d.DecodeFeatureIndex(curIndex, v.FeatureIndex)
-	curIndex = d.DecodeUV(curIndex, v.UV)
+	curIndex = d.DecodeUV(curIndex, v.QUV)
 	if curIndex < len(d.data) {
 		d.curIndex = curIndex
 	} else {
@@ -209,11 +209,11 @@ func (d *LitMeshDecoder) Next() *MeshVertex {
 		return nil
 	}
 	curIndex := d.curIndex
-	v := &MeshVertex{SimpleVertex: SimpleVertex{ColorIndex: new(uint16), FeatureIndex: new(uint32)}, Normals: new(uint16)}
-	curIndex = d.DecodeQuantizedPosition(curIndex, &v.Pos)
+	v := &MeshVertex{SimpleVertex: SimpleVertex{ColorIndex: new(uint16), FeatureIndex: new(uint32)}, OctEncodedNormal: new(uint16)}
+	curIndex = d.DecodeQuantizedPosition(curIndex, &v.QPos)
 	curIndex = d.DecodeColorIndex(curIndex, v.ColorIndex)
 	curIndex = d.DecodeFeatureIndex(curIndex, v.FeatureIndex)
-	curIndex, *v.Normals = d.Decodeu16(curIndex)
+	curIndex, *v.OctEncodedNormal = d.Decodeu16(curIndex)
 	curIndex += 2
 	if curIndex < len(d.data) {
 		d.curIndex = curIndex

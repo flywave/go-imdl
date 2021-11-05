@@ -33,7 +33,7 @@ func TestMeshBuilder(t *testing.T) {
 
 	for i := range vers {
 		find := uint32(i)
-		vers[i] = MeshVertex{SimpleVertex: SimpleVertex{Pos: [3]uint16{uint16(i), uint16(i), uint16(i)}, FeatureIndex: &find}}
+		vers[i] = MeshVertex{SimpleVertex: SimpleVertex{QPos: [3]uint16{uint16(i), uint16(i), uint16(i)}, FeatureIndex: &find}}
 	}
 
 	builder := newSimpleMeshBuilder(10)
@@ -70,7 +70,7 @@ func TestTexturedMeshDecoder(t *testing.T) {
 
 	for i := range vers {
 		find := uint32(i)
-		vers[i] = MeshVertex{SimpleVertex: SimpleVertex{Pos: [3]uint16{uint16(i), uint16(i), uint16(i)}, FeatureIndex: &find}, UV: &[2]uint16{uint16(i), uint16(i)}}
+		vers[i] = MeshVertex{SimpleVertex: SimpleVertex{QPos: [3]uint16{uint16(i), uint16(i), uint16(i)}, FeatureIndex: &find}, QUV: &[2]uint16{uint16(i), uint16(i)}}
 	}
 
 	builder := newTexturedMeshBuilder(10)
@@ -96,7 +96,7 @@ func TestTexturedMeshDecoder(t *testing.T) {
 	}
 
 	for i := range vers {
-		if vers[i].UV == nil || dver[i].UV == nil || *vers[i].UV != *dver[i].UV {
+		if vers[i].QUV == nil || dver[i].QUV == nil || *vers[i].QUV != *dver[i].QUV {
 			t.FailNow()
 		}
 	}
