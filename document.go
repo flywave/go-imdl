@@ -6,6 +6,8 @@ import (
 	"github.com/flywave/gltf"
 )
 
+const NODE_ROOT = "Node_Root"
+
 type FeatureIndexType uint32
 
 const (
@@ -53,6 +55,7 @@ type VertexTable struct {
 		DecodedMax   []float32 `json:"decodedMax"`
 	} `json:"params"`
 	MaterialAtlas *MaterialAtlas `json:"materialAtlas,omitempty"`
+	VertexData    []byte         `json:"-"`
 }
 
 type Primitive struct {
@@ -159,6 +162,7 @@ type Surface struct {
 		DecodedMin []float32 `json:"decodedMin"`
 		DecodedMax []float32 `json:"decodedMax"`
 	} `json:"uvParams"`
+	IndicesData []byte `json:"-"`
 }
 
 type AuxChannel struct {
@@ -182,6 +186,7 @@ type AuxChannelTable struct {
 	Displacements     []QuantizedAuxChannel `json:"displacements,omitempty"`
 	Normals           []AuxChannel          `json:"normals,omitempty"`
 	Params            []QuantizedAuxChannel `json:"params,omitempty"`
+	AuxChannelData    []byte                `json:"-"`
 }
 
 type MeshPrimitive struct {
@@ -191,18 +196,21 @@ type MeshPrimitive struct {
 	Edges       *MeshEdges       `json:"edges,omitempty"`
 	AuxChannels *AuxChannelTable `json:"auxChannels,omitempty"`
 	AreaPattern *AreaPattern     `json:"areaPattern,omitempty"`
+	Data        *MeshData        `json:"-"`
 }
 
 type PolylinePrimitive struct {
 	Primitive
 	Polyline
 	Type PrimitiveType `json:"type,omitempty"` // Polyline
+	Data *PolylineData `json:"-"`
 }
 
 type PointStringPrimitive struct {
 	Primitive
-	Type    PrimitiveType `json:"type,omitempty"` // Point
-	Indices string        `json:"indices,omitempty"`
+	Type    PrimitiveType    `json:"type,omitempty"` // Point
+	Indices string           `json:"indices,omitempty"`
+	Data    *PointStringData `json:"-"`
 }
 
 type Mesh struct {
@@ -285,6 +293,7 @@ type Buffer struct {
 	Extensions gltf.Extensions `json:"extensions,omitempty"`
 	Extras     interface{}     `json:"extras,omitempty"`
 	Name       string          `json:"name,omitempty"`
+	Type       string          `json:"type,omitempty"`
 	ByteLength uint32          `json:"byteLength" validate:"required"`
 }
 
@@ -359,6 +368,7 @@ type RenderTexture struct {
 	Height        uint32 `json:"height"`
 	IsGlyph       bool   `json:"isGlyph"`
 	IsTileSection bool   `json:"isTileSection"`
+	TextureData   []byte `json:"-"`
 }
 
 type TextureMappingMode int32
@@ -438,7 +448,7 @@ type Document struct {
 	Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
 	NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
 	RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
-	Data             []byte                     `json:"-"`
+	chunks           []chunkData                `json:"-"`
 }
 
 func newString(s string) *string {
@@ -450,4 +460,25 @@ func NewDocument() *Document {
 		Scene:  newString("defaultScene"),
 		Scenes: map[string]*Scene{"defaultScene": {Nodes: []string{"rootNode"}}},
 	}
+}
+
+func (doc *Document) FindBuffer(bufferView string) []byte {
+	for i := range doc.chunks {
+		if doc.chunks[i].name == bufferView {
+			return doc.chunks[i].data
+		}
+	}
+	return nil
+}
+
+func (doc *Document) decodeChunkDatas(data []byte) {
+	for k, v := range doc.BufferViews {
+		byteOffset := int(v.ByteOffset)
+		byteLength := int(v.ByteLength)
+		doc.chunks = append(doc.chunks, chunkData{name: k, data: data[byteOffset : byteOffset+byteLength]})
+	}
+}
+
+func (doc *Document) encodeChunkDatas() {
+	doc.BufferViews = make(map[string]*BufferView)
 }

@@ -70,7 +70,7 @@ func (d *Decoder) validateDocumentQuotas(doc *Document, isBinary bool) error {
 		allocs += uint64(b.ByteLength)
 	}
 	if allocs > d.MaxMemoryAllocation {
-		return errors.New("gltf: Memory allocation count quota exceeded")
+		return errors.New("imdl: Memory allocation count quota exceeded")
 	}
 	return nil
 }
@@ -100,7 +100,7 @@ func (d *Decoder) decodeDocument(doc *Document) (bool, error) {
 	if data, err := d.decodeBinaryBuffer(glbHeader); err != nil {
 		return isBinary, err
 	} else {
-		doc.Data = data
+		doc.decodeChunkDatas(data)
 	}
 
 	return isBinary, err
@@ -122,14 +122,14 @@ func (d *Decoder) readGLBHeader() (*glbHeader, error) {
 }
 
 func (d *Decoder) validateGLBHeader(header *glbHeader) error {
-	if (header.JSONHeader.Length + uint32(unsafe.Sizeof(header))) > header.Length {
-		return errors.New("gltf: Invalid GLB JSON header")
+	if header.Version != 1 || (header.JSONHeader.Length+uint32(unsafe.Sizeof(header))) > header.Length {
+		return errors.New("imdl: Invalid imdl GLB JSON header")
 	}
 	return nil
 }
 
 func (d *Decoder) decodeBinaryBuffer(h *glbHeader) ([]byte, error) {
-	byteLength := int(h.Length) - 20 - int(h.JSONHeader.Length)
+	byteLength := int(h.Length) - binary.Size(glbHeader{}) - int(h.JSONHeader.Length)
 	data := make([]byte, byteLength)
 	_, err := io.ReadFull(d.r, data)
 	return data, err

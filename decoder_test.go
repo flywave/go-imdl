@@ -2,6 +2,7 @@ package imdl
 
 import (
 	"encoding/json"
+	"io/ioutil"
 	"os"
 	"testing"
 )
@@ -25,4 +26,15 @@ func TestDecode(t *testing.T) {
 	if err != nil || doc == nil {
 		t.FailNow()
 	}
+
+	data := doc.FindBuffer("0x4f")
+
+	ioutil.WriteFile("./test.jpg", data, 0777)
+
+	os.Remove("./test.jpg")
+
+	data = doc.FindBuffer("bvindices4Surface")
+
+	data = doc.FindBuffer("bvVertex4")
+
 }
