@@ -17,7 +17,7 @@ type TextureFormat uint32
 
 const (
 	FormatJPG TextureFormat = 0
-	FormatPNG TextureFormat = 1
+	FormatPNG TextureFormat = 2
 )
 
 func encodeImage(format TextureFormat, writer io.Writer, rgba image.Image) {

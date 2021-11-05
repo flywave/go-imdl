@@ -525,7 +525,7 @@ func (doc *Document) decodeChunkData(data []byte) {
 
 	for _, t := range doc.NamedTextures {
 		if cd, ok := chunkMap[t.BufferView]; ok {
-			t.TextureData = DecodeTexture(cd.data, FormatJPG)
+			t.TextureData = DecodeTexture(cd.data, TextureFormat(t.Format))
 		}
 	}
 }
@@ -593,7 +593,7 @@ func (doc *Document) encodeChunkData() [][]byte {
 			t.BufferView = fmt.Sprintf("buffer-%d", chunkid)
 			chunkid++
 		}
-		doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, FormatJPG)})
+		doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, TextureFormat(t.Format))})
 	}
 
 	offset := uint32(0)
