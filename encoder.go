@@ -74,7 +74,7 @@ func (e *Encoder) encodeBinary(doc *Document) error {
 	}
 	jsonHeader := JSONHeader{
 		Length: uint32(((len(jsonText) + 3) / 4) * 4),
-		Type:   glbChunkJSON,
+		Type:   0,
 	}
 	header := glbHeader{
 		Magic:      glbHeaderMagic,
