@@ -54,7 +54,7 @@ func (e *Encoder) WithWriteHandler(h gltf.WriteHandler) *Encoder {
 func (e *Encoder) Encode(doc *Document) error {
 	var err error
 	if e.AsBinary {
-		_, err = e.encodeBinary(doc)
+		err = e.encodeBinary(doc)
 	} else {
 		err = json.NewEncoder(e.w).Encode(doc)
 	}
@@ -65,10 +65,12 @@ func (e *Encoder) Encode(doc *Document) error {
 	return err
 }
 
-func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
+func (e *Encoder) encodeBinary(doc *Document) error {
+	chunks := doc.encodeChunkData()
+
 	jsonText, err := json.Marshal(doc)
 	if err != nil {
-		return false, err
+		return err
 	}
 	jsonHeader := JSONHeader{
 		Length: uint32(((len(jsonText) + 3) / 4) * 4),
@@ -85,30 +87,16 @@ func (e *Encoder) encodeBinary(doc *Document) (bool, error) {
 		headerPadding[i] = ' '
 	}
 
-	var firstBuffers *Buffer
-
-	for k := range doc.Buffers {
-		firstBuffers = doc.Buffers[k]
-		break
-	}
-
-	hasBinChunk := len(doc.Buffers) > 0
-	var binPaddedLength uint32
-	if hasBinChunk {
-		binPaddedLength = ((firstBuffers.ByteLength + 3) / 4) * 4
-		header.Length += uint32(8) + binPaddedLength
-	}
-
 	err = binary.Write(e.w, binary.LittleEndian, &header)
 	if err != nil {
-		return false, err
+		return err
 	}
 	e.w.Write(jsonText)
 	e.w.Write(headerPadding)
 
-	if hasBinChunk {
-
+	for i := range chunks {
+		e.w.Write(chunks[i])
 	}
 
-	return hasBinChunk, err
+	return nil
 }

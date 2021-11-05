@@ -6,12 +6,9 @@ import (
 	"image/jpeg"
 	"image/png"
 	"io"
-
-	webp "github.com/chai2010/webp"
 )
 
 func init() {
-	image.RegisterFormat("webp", "RIFF????WEBPVP8", webp.Decode, webp.DecodeConfig)
 	image.RegisterFormat("png", "\x89PNG\r\n\x1a\n", png.Decode, png.DecodeConfig)
 	image.RegisterFormat("jpeg", "\xff\xd8", jpeg.Decode, jpeg.DecodeConfig)
 }
@@ -19,9 +16,8 @@ func init() {
 type TextureFormat uint32
 
 const (
-	FormatJPG  TextureFormat = 0
-	FormatPNG  TextureFormat = 1
-	FormatWEBP TextureFormat = 2
+	FormatJPG TextureFormat = 0
+	FormatPNG TextureFormat = 1
 )
 
 func encodeImage(format TextureFormat, writer io.Writer, rgba image.Image) {
@@ -29,8 +25,6 @@ func encodeImage(format TextureFormat, writer io.Writer, rgba image.Image) {
 		jpeg.Encode(writer, rgba, nil)
 	} else if format == FormatPNG {
 		png.Encode(writer, rgba)
-	} else if format == FormatWEBP {
-		webp.Encode(writer, rgba, &webp.Options{Lossless: true})
 	}
 }
 
@@ -43,12 +37,6 @@ func decodeImage(format TextureFormat, reader io.Reader) image.Image {
 		return img
 	} else if format == FormatPNG {
 		img, err := png.Decode(reader)
-		if err != nil {
-			return nil
-		}
-		return img
-	} else if format == FormatWEBP {
-		img, err := webp.Decode(reader)
 		if err != nil {
 			return nil
 		}

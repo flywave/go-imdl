@@ -12,10 +12,7 @@ type VertexBuilder struct {
 
 func (b *VertexBuilder) Advance(nBytes int) bool {
 	b.curIndex += nBytes
-	if b.curIndex <= len(b.data) {
-		return true
-	}
-	return false
+	return b.curIndex <= len(b.data)
 }
 
 func (b *VertexBuilder) Append8(val byte) {
@@ -23,24 +20,14 @@ func (b *VertexBuilder) Append8(val byte) {
 	b.Advance(1)
 }
 
-func (b *VertexBuilder) Append16(val int16) {
+func (b *VertexBuilder) Append16(val uint16) {
 	b.Append8(uint8(val & 0x00ff))
 	b.Append8(uint8(val >> 8))
 }
 
-func (b *VertexBuilder) Appendu16(val uint16) {
-	b.Append8(uint8(val & 0x00ff))
-	b.Append8(uint8(val >> 8))
-}
-
-func (b *VertexBuilder) Append32(val int32) {
-	b.Append16(int16(val & 0x0000ffff))
-	b.Append16(int16(val >> 16))
-}
-
-func (b *VertexBuilder) Appendu32(val uint32) {
-	b.Appendu16(uint16(val & 0x0000ffff))
-	b.Appendu16(uint16(val >> 16))
+func (b *VertexBuilder) Append32(val uint32) {
+	b.Append16(uint16(val & 0x0000ffff))
+	b.Append16(uint16(val >> 16))
 }
 
 func (b *VertexBuilder) AppendColor(color color.NRGBA) {
@@ -51,7 +38,6 @@ func (b *VertexBuilder) AppendColor(color color.NRGBA) {
 		color.R = 0
 		color.G = 0
 		color.B = 0
-		break
 	case 255:
 		break
 	default:
@@ -60,7 +46,6 @@ func (b *VertexBuilder) AppendColor(color color.NRGBA) {
 			color.R = uint8(math.Floor(float64(color.R)*f + 0.5))
 			color.G = uint8(math.Floor(float64(color.G)*f + 0.5))
 			color.B = uint8(math.Floor(float64(color.B)*f + 0.5))
-			break
 		}
 	}
 
@@ -94,14 +79,14 @@ func (b *SimpleBuilder) AppendVertex(v *SimpleVertex) {
 }
 
 func (b *SimpleBuilder) AppendQuantizedPosition(pos [3]uint16) {
-	b.Appendu16(pos[0])
-	b.Appendu16(pos[1])
-	b.Appendu16(pos[2])
+	b.Append16(pos[0])
+	b.Append16(pos[1])
+	b.Append16(pos[2])
 }
 
 func (b *SimpleBuilder) AppendColorIndex(colorIndex *uint16) {
 	if colorIndex != nil {
-		b.Appendu16(*colorIndex)
+		b.Append16(*colorIndex)
 	} else {
 		b.Advance(2)
 	}
@@ -109,7 +94,7 @@ func (b *SimpleBuilder) AppendColorIndex(colorIndex *uint16) {
 
 func (b *SimpleBuilder) AppendFeatureIndex(featureIndex *uint32) {
 	if featureIndex != nil {
-		b.Appendu32(*featureIndex)
+		b.Append32(*featureIndex)
 	} else {
 		b.Advance(4)
 	}
@@ -169,8 +154,8 @@ func newBaseMeshBuilder(vertexCount int) *BaseMeshBuilder {
 
 func (b *BaseMeshBuilder) AppendUV(uv *[2]uint16) {
 	if uv != nil {
-		b.Appendu16(uv[0])
-		b.Appendu16(uv[1])
+		b.Append16(uv[0])
+		b.Append16(uv[1])
 	} else {
 		b.Advance(4)
 	}
@@ -223,7 +208,7 @@ func newTexturedLitMeshBuilder(vertexCount int) *TexturedLitMeshBuilder {
 
 func (b *TexturedLitMeshBuilder) AppendNormal(normal *uint16) {
 	if normal != nil {
-		b.Appendu16(*normal)
+		b.Append16(*normal)
 	} else {
 		b.Advance(2)
 	}
@@ -254,7 +239,7 @@ func newLitMeshBuilder(vertexCount int) *LitMeshBuilder {
 
 func (b *LitMeshBuilder) AppendVertex(v *MeshVertex) {
 	b.BaseMeshBuilder.SimpleBuilder.AppendVertex(&v.SimpleVertex)
-	b.Appendu16(*v.Normals)
+	b.Append16(*v.Normals)
 	b.Advance(2)
 }
 

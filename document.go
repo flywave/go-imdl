@@ -2,6 +2,8 @@ package imdl
 
 import (
 	"encoding/json"
+	"fmt"
+	"image"
 
 	"github.com/flywave/gltf"
 )
@@ -162,7 +164,6 @@ type Surface struct {
 		DecodedMin []float32 `json:"decodedMin"`
 		DecodedMax []float32 `json:"decodedMax"`
 	} `json:"uvParams"`
-	IndicesData []byte `json:"-"`
 }
 
 type AuxChannel struct {
@@ -362,13 +363,13 @@ func (p *AreaPatternSymbol) UnmarshalJSON(data []byte) error {
 }
 
 type RenderTexture struct {
-	BufferView    string `json:"bufferView"`
-	Format        uint32 `json:"format"`
-	Width         uint32 `json:"width"`
-	Height        uint32 `json:"height"`
-	IsGlyph       bool   `json:"isGlyph"`
-	IsTileSection bool   `json:"isTileSection"`
-	TextureData   []byte `json:"-"`
+	BufferView    string      `json:"bufferView"`
+	Format        uint32      `json:"format"`
+	Width         uint32      `json:"width"`
+	Height        uint32      `json:"height"`
+	IsGlyph       bool        `json:"isGlyph"`
+	IsTileSection bool        `json:"isTileSection"`
+	TextureData   image.Image `json:"-"`
 }
 
 type TextureMappingMode int32
@@ -471,14 +472,142 @@ func (doc *Document) FindBuffer(bufferView string) []byte {
 	return nil
 }
 
-func (doc *Document) decodeChunkDatas(data []byte) {
+func (doc *Document) decodeChunkData(data []byte) {
+	chunkMap := make(map[string]*chunkData)
 	for k, v := range doc.BufferViews {
 		byteOffset := int(v.ByteOffset)
 		byteLength := int(v.ByteLength)
-		doc.chunks = append(doc.chunks, chunkData{name: k, data: data[byteOffset : byteOffset+byteLength]})
+		cd := chunkData{name: k, data: data[byteOffset : byteOffset+byteLength]}
+		doc.chunks = append(doc.chunks, cd)
+		chunkMap[k] = &cd
+	}
+
+	for _, m := range doc.Meshes {
+		switch privs := m.Primitives.(type) {
+		case []MeshPrimitive:
+			for i := range privs {
+				privs[i].Data = &MeshData{Type: privs[i].Surface.Type}
+
+				if cd, ok := chunkMap[privs[i].Surface.Indices]; ok {
+					privs[i].Data.DecodeIndices(cd.data)
+				}
+
+				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
+					privs[i].Data.DecodeVertexs(cd.data, privs[i].Vertices.Count)
+				}
+			}
+		case []PolylinePrimitive:
+			for i := range privs {
+				privs[i].Data = &PolylineData{}
+
+				if cd, ok := chunkMap[privs[i].Indices]; ok {
+					privs[i].Data.DecodeIndices(cd.data)
+				}
+
+				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
+					privs[i].Data.DecodeVertexs(cd.data)
+				}
+			}
+		case []PointStringPrimitive:
+			for i := range privs {
+				privs[i].Data = &PointStringData{}
+
+				if cd, ok := chunkMap[privs[i].Indices]; ok {
+					privs[i].Data.DecodeIndices(cd.data)
+				}
+
+				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
+					privs[i].Data.DecodeVertexs(cd.data)
+				}
+			}
+		}
+	}
+
+	for _, t := range doc.NamedTextures {
+		if cd, ok := chunkMap[t.BufferView]; ok {
+			t.TextureData = DecodeTexture(cd.data, FormatJPG)
+		}
 	}
 }
 
-func (doc *Document) encodeChunkDatas() {
+func (doc *Document) encodeChunkData() [][]byte {
+	doc.Buffers = make(map[string]*Buffer)
 	doc.BufferViews = make(map[string]*BufferView)
+
+	const bufferName = "binary_glTF"
+
+	chunkid := 0
+
+	for _, m := range doc.Meshes {
+		switch privs := m.Primitives.(type) {
+		case []MeshPrimitive:
+			for i := range privs {
+				if privs[i].Data != nil {
+					if privs[i].Surface.Indices == "" {
+						privs[i].Surface.Indices = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Surface.Indices, data: privs[i].Data.EncodeIndices()})
+					if privs[i].Vertices.BufferView == "" {
+						privs[i].Vertices.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+				}
+			}
+		case []PolylinePrimitive:
+			for i := range privs {
+				if privs[i].Data != nil {
+					if privs[i].Indices == "" {
+						privs[i].Indices = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Indices, data: privs[i].Data.EncodeIndices()})
+					if privs[i].Vertices.BufferView == "" {
+						privs[i].Vertices.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+				}
+			}
+		case []PointStringPrimitive:
+			for i := range privs {
+				if privs[i].Data != nil {
+					if privs[i].Indices == "" {
+						privs[i].Indices = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Indices, data: privs[i].Data.EncodeIndices()})
+					if privs[i].Vertices.BufferView == "" {
+						privs[i].Vertices.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+						chunkid++
+					}
+					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+				}
+			}
+		}
+	}
+
+	for _, t := range doc.NamedTextures {
+		if t.BufferView == "" {
+			t.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+			chunkid++
+		}
+		doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, FormatJPG)})
+	}
+
+	offset := uint32(0)
+
+	out := make([][]byte, len(doc.chunks))
+
+	for i, ck := range doc.chunks {
+		dataLen := uint32(len(ck.data))
+		doc.BufferViews[ck.name] = &BufferView{Buffer: bufferName, ByteOffset: offset, ByteLength: dataLen}
+		out[i] = createPaddingBytes(ck.data, dataLen, 8, 0x20)
+		offset += uint32(len(out[i]))
+	}
+
+	doc.Buffers[bufferName] = &Buffer{ByteLength: offset}
+
+	return out
 }

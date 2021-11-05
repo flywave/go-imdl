@@ -1,5 +1,3 @@
-github.com/chai2010/webp v1.1.0 h1:4Ei0/BRroMF9FaXDG2e4OxwFcuW2vcXd+A6tyqTJUQQ=
-github.com/chai2010/webp v1.1.0/go.mod h1:LP12PG5IFmLGHUU26tBiCBKnghxx3toZFwDjOYvd3Ow=
 github.com/flywave/gltf v0.20.4-0.20211104075512-1079abae6a05 h1:LjouCs9HzfbTKXk3ES3HAVfsWn27dwuqq5R8mLfxF70=
 github.com/flywave/gltf v0.20.4-0.20211104075512-1079abae6a05/go.mod h1:WJQOty0+tEOB05KKpqAT8BhqYYbTknXEFsGL/Yb9Fwo=
 github.com/go-test/deep v1.0.1 h1:UQhStjbkDClarlmv0am7OXXO4/GaPdCGiUiMTvi28sg=

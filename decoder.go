@@ -100,7 +100,7 @@ func (d *Decoder) decodeDocument(doc *Document) (bool, error) {
 	if data, err := d.decodeBinaryBuffer(glbHeader); err != nil {
 		return isBinary, err
 	} else {
-		doc.decodeChunkDatas(data)
+		doc.decodeChunkData(data)
 	}
 
 	return isBinary, err
