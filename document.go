@@ -2,6 +2,7 @@ package imdl
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"image"
 
@@ -192,7 +193,7 @@ type AuxChannelTable struct {
 
 type MeshPrimitive struct {
 	Primitive
-	Type        PrimitiveType    `json:"type,omitempty"` // Mesh
+	Type        PrimitiveType    `json:"type"` // Mesh
 	Surface     Surface          `json:"surface"`
 	Edges       *MeshEdges       `json:"edges,omitempty"`
 	AuxChannels *AuxChannelTable `json:"auxChannels,omitempty"`
@@ -203,13 +204,13 @@ type MeshPrimitive struct {
 type PolylinePrimitive struct {
 	Primitive
 	Polyline
-	Type PrimitiveType `json:"type,omitempty"` // Polyline
+	Type PrimitiveType `json:"type"` // Polyline
 	Data *PolylineData `json:"-"`
 }
 
 type PointStringPrimitive struct {
 	Primitive
-	Type    PrimitiveType    `json:"type,omitempty"` // Point
+	Type    PrimitiveType    `json:"type"` // Point
 	Indices string           `json:"indices,omitempty"`
 	Data    *PointStringData `json:"-"`
 }
@@ -290,6 +291,56 @@ func (p *Mesh) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+func (p *Mesh) MarshalJSON() ([]byte, error) {
+	switch privs := p.Primitives.(type) {
+	case []AreaPattern:
+		type m_mesh struct {
+			Primitives []AreaPattern `json:"primitives,omitempty"`
+			Layer      string        `json:"layer,omitempty"`
+		}
+		m := &m_mesh{Primitives: privs, Layer: p.Layer}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	case []MeshPrimitive:
+		type m_mesh struct {
+			Primitives []MeshPrimitive `json:"primitives,omitempty"`
+			Layer      string          `json:"layer,omitempty"`
+		}
+		m := &m_mesh{Primitives: privs, Layer: p.Layer}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	case []PolylinePrimitive:
+		type p_mesh struct {
+			Primitives []PolylinePrimitive `json:"primitives,omitempty"`
+			Layer      string              `json:"layer,omitempty"`
+		}
+		m := &p_mesh{Primitives: privs, Layer: p.Layer}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	case []PointStringPrimitive:
+		type p_mesh struct {
+			Primitives []PointStringPrimitive `json:"primitives,omitempty"`
+			Layer      string                 `json:"layer,omitempty"`
+		}
+		m := &p_mesh{Primitives: privs, Layer: p.Layer}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	}
+	return nil, errors.New("error")
+}
+
 type Buffer struct {
 	Extensions gltf.Extensions `json:"extensions,omitempty"`
 	Extras     interface{}     `json:"extras,omitempty"`
@@ -360,6 +411,42 @@ func (p *AreaPatternSymbol) UnmarshalJSON(data []byte) error {
 		}
 	}
 	return nil
+}
+
+func (p *AreaPatternSymbol) MarshalJSON() ([]byte, error) {
+	switch privs := p.Primitives.(type) {
+	case []MeshPrimitive:
+		type m_mesh struct {
+			Primitives []MeshPrimitive `json:"primitives,omitempty"`
+		}
+		m := &m_mesh{Primitives: privs}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	case []PolylinePrimitive:
+		type p_mesh struct {
+			Primitives []PolylinePrimitive `json:"primitives,omitempty"`
+		}
+		m := &p_mesh{Primitives: privs}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	case []PointStringPrimitive:
+		type p_mesh struct {
+			Primitives []PointStringPrimitive `json:"primitives,omitempty"`
+		}
+		m := &p_mesh{Primitives: privs}
+		b, err := json.Marshal(m)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	}
+	return nil, errors.New("error")
 }
 
 type RenderTexture struct {
@@ -530,7 +617,7 @@ func (doc *Document) decodeChunkData(data []byte) {
 	}
 }
 
-func (doc *Document) encodeChunkData() [][]byte {
+func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 	doc.Buffers = make(map[string]*Buffer)
 	doc.BufferViews = make(map[string]*BufferView)
 
@@ -609,5 +696,5 @@ func (doc *Document) encodeChunkData() [][]byte {
 
 	doc.Buffers[bufferName] = &Buffer{ByteLength: offset}
 
-	return out
+	return out, offset
 }

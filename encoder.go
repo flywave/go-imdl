@@ -66,7 +66,7 @@ func (e *Encoder) Encode(doc *Document) error {
 }
 
 func (e *Encoder) encodeBinary(doc *Document) error {
-	chunks := doc.encodeChunkData()
+	chunks, si := doc.encodeChunkData()
 
 	jsonText, err := json.Marshal(doc)
 	if err != nil {
@@ -79,7 +79,7 @@ func (e *Encoder) encodeBinary(doc *Document) error {
 	header := glbHeader{
 		Magic:      glbHeaderMagic,
 		Version:    1,
-		Length:     12 + 8 + jsonHeader.Length,
+		Length:     12 + 8 + jsonHeader.Length + si,
 		JSONHeader: jsonHeader,
 	}
 	headerPadding := make([]byte, header.JSONHeader.Length-uint32(len(jsonText)))

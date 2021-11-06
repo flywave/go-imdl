@@ -1,6 +1,8 @@
 package imdl
 
-import "errors"
+import (
+	"errors"
+)
 
 func encodeIndex(index uint32, bytes []byte, byteIndex int) error {
 	if byteIndex+2 >= len(bytes) {
@@ -28,9 +30,9 @@ func EncodeVertexIndices(indices []uint32) []byte {
 
 func DecodeVertexIndices(bytes []byte) []uint32 {
 	len := len(bytes) / 3
-	inds := make([]uint32, len)
-	for i := range inds {
-		inds[i] = decodeIndex(i, bytes)
+	indices := make([]uint32, len)
+	for i := range indices {
+		indices[i] = decodeIndex(i, bytes)
 	}
-	return inds
+	return indices
 }
