@@ -69,6 +69,7 @@ func decodeValue(val uint16) [3]float32 {
 	if n[2] < 0 {
 		x := n[0]
 		y := n[1]
+
 		n[0] = (1 - float32(math.Abs(float64(y)))) * signNotZero(x)
 		n[1] = (1 - float32(math.Abs(float64(x)))) * signNotZero(y)
 	}

@@ -61,6 +61,13 @@ type VertexTable struct {
 	VertexData    []byte         `json:"-"`
 }
 
+func (v *VertexTable) GetPosQParams3d() *QParams3d {
+	ra := &Range3d{Low: [3]float32{v.Params.DecodedMin[0], v.Params.DecodedMin[1], v.Params.DecodedMin[2]}, High: [3]float32{v.Params.DecodedMax[0], v.Params.DecodedMax[1], v.Params.DecodedMax[2]}}
+	qparams := &QParams3d{}
+	qparams.SetFromRange(ra, rangeScale16)
+	return qparams
+}
+
 type Primitive struct {
 	Material              string      `json:"material,omitempty"`
 	Vertices              VertexTable `json:"vertices,omitempty"`
@@ -126,9 +133,77 @@ type ClipPrimitiveShape struct {
 
 type ClipVector []ClipPrimitive
 
+type Range2d struct {
+	Low  [2]float32 `json:"low"`
+	High [2]float32 `json:"high"`
+}
+
+func (r *Range2d) ExtendXY(x float32, y float32) {
+	if x < r.Low[0] {
+		r.Low[0] = x
+	}
+	if x > r.High[0] {
+		r.High[0] = x
+	}
+
+	if y < r.Low[1] {
+		r.Low[1] = y
+	}
+	if y > r.High[1] {
+		r.High[1] = y
+	}
+}
+
+func (r *Range2d) Extend(xyz [2]float32) {
+	r.ExtendXY(xyz[0], xyz[1])
+}
+
+func CreateRange2d(points [][2]float32) *Range2d {
+	result := &Range2d{}
+	for _, point := range points {
+		result.Extend(point)
+	}
+	return result
+}
+
 type Range3d struct {
 	Low  [3]float32 `json:"low"`
 	High [3]float32 `json:"high"`
+}
+
+func (r *Range3d) ExtendXYZ(x float32, y float32, z float32) {
+	if x < r.Low[0] {
+		r.Low[0] = x
+	}
+	if x > r.High[0] {
+		r.High[0] = x
+	}
+
+	if y < r.Low[1] {
+		r.Low[1] = y
+	}
+	if y > r.High[1] {
+		r.High[1] = y
+	}
+
+	if z < r.Low[2] {
+		r.Low[2] = z
+	}
+	if z > r.High[2] {
+		r.High[2] = z
+	}
+}
+
+func (r *Range3d) Extend(xyz [3]float32) {
+	r.ExtendXYZ(xyz[0], xyz[1], xyz[2])
+}
+
+func CreateRange3d(points [][3]float32) *Range3d {
+	result := &Range3d{}
+	for _, point := range points {
+		result.Extend(point)
+	}
+	return result
 }
 
 type AreaPattern struct {
@@ -165,6 +240,16 @@ type Surface struct {
 		DecodedMin []float32 `json:"decodedMin"`
 		DecodedMax []float32 `json:"decodedMax"`
 	} `json:"uvParams"`
+}
+
+func (v *Surface) GetUvQParams2d() *QParams2d {
+	if v.UVParams == nil {
+		return nil
+	}
+	ra := &Range2d{Low: [2]float32{v.UVParams.DecodedMin[0], v.UVParams.DecodedMin[1]}, High: [2]float32{v.UVParams.DecodedMax[0], v.UVParams.DecodedMax[1]}}
+	qparams := &QParams2d{}
+	qparams.SetFromRange(ra, rangeScale16)
+	return qparams
 }
 
 type AuxChannel struct {
@@ -575,6 +660,9 @@ func (doc *Document) decodeChunkData(data []byte) {
 			for i := range privs {
 				privs[i].Data = &MeshData{Type: privs[i].Surface.Type}
 
+				uvq := privs[i].Surface.GetUvQParams2d()
+				posq := privs[i].Vertices.GetPosQParams3d()
+
 				if cd, ok := chunkMap[privs[i].Surface.Indices]; ok {
 					privs[i].Data.DecodeIndices(cd.data)
 				}
@@ -582,11 +670,15 @@ func (doc *Document) decodeChunkData(data []byte) {
 				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
 					privs[i].Data.DecodeVertexs(cd.data, privs[i].Vertices.Count)
 				}
+
+				privs[i].Data.UnQuantize(posq, uvq)
 			}
 		case []PolylinePrimitive:
 			for i := range privs {
 				privs[i].Data = &PolylineData{}
 
+				posq := privs[i].Vertices.GetPosQParams3d()
+
 				if cd, ok := chunkMap[privs[i].Indices]; ok {
 					privs[i].Data.DecodeIndices(cd.data)
 				}
@@ -594,11 +686,15 @@ func (doc *Document) decodeChunkData(data []byte) {
 				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
 					privs[i].Data.DecodeVertexs(cd.data)
 				}
+
+				privs[i].Data.UnQuantize(posq)
 			}
 		case []PointStringPrimitive:
 			for i := range privs {
 				privs[i].Data = &PointStringData{}
 
+				posq := privs[i].Vertices.GetPosQParams3d()
+
 				if cd, ok := chunkMap[privs[i].Indices]; ok {
 					privs[i].Data.DecodeIndices(cd.data)
 				}
@@ -606,6 +702,8 @@ func (doc *Document) decodeChunkData(data []byte) {
 				if cd, ok := chunkMap[privs[i].Vertices.BufferView]; ok {
 					privs[i].Data.DecodeVertexs(cd.data)
 				}
+
+				privs[i].Data.UnQuantize(posq)
 			}
 		}
 	}
@@ -630,21 +728,36 @@ func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 		case []MeshPrimitive:
 			for i := range privs {
 				if privs[i].Data != nil {
+					posr, uvr := privs[i].Data.Quantize()
+
 					if privs[i].Surface.Indices == "" {
 						privs[i].Surface.Indices = fmt.Sprintf("buffer-%d", chunkid)
 						chunkid++
 					}
 					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Surface.Indices, data: privs[i].Data.EncodeIndices()})
+
+					if uvr != nil {
+						privs[i].Surface.UVParams.DecodedMin = uvr.Low[:]
+						privs[i].Surface.UVParams.DecodedMax = uvr.High[:]
+					}
+
 					if privs[i].Vertices.BufferView == "" {
 						privs[i].Vertices.BufferView = fmt.Sprintf("buffer-%d", chunkid)
 						chunkid++
 					}
 					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+
+					if posr != nil {
+						privs[i].Vertices.Params.DecodedMin = posr.Low[:]
+						privs[i].Vertices.Params.DecodedMax = posr.High[:]
+					}
 				}
 			}
 		case []PolylinePrimitive:
 			for i := range privs {
 				if privs[i].Data != nil {
+					posr := privs[i].Data.Quantize()
+
 					if privs[i].Indices == "" {
 						privs[i].Indices = fmt.Sprintf("buffer-%d", chunkid)
 						chunkid++
@@ -655,11 +768,18 @@ func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 						chunkid++
 					}
 					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+
+					if posr != nil {
+						privs[i].Vertices.Params.DecodedMin = posr.Low[:]
+						privs[i].Vertices.Params.DecodedMax = posr.High[:]
+					}
 				}
 			}
 		case []PointStringPrimitive:
 			for i := range privs {
 				if privs[i].Data != nil {
+					posr := privs[i].Data.Quantize()
+
 					if privs[i].Indices == "" {
 						privs[i].Indices = fmt.Sprintf("buffer-%d", chunkid)
 						chunkid++
@@ -670,6 +790,11 @@ func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 						chunkid++
 					}
 					doc.chunks = append(doc.chunks, chunkData{name: privs[i].Vertices.BufferView, data: privs[i].Data.EncodeVertexs()})
+
+					if posr != nil {
+						privs[i].Vertices.Params.DecodedMin = posr.Low[:]
+						privs[i].Vertices.Params.DecodedMax = posr.High[:]
+					}
 				}
 			}
 		}
