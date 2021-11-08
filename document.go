@@ -723,34 +723,36 @@ func (doc *Document) decodeChunkData(data []byte) {
 		}
 	}
 
-	if cd, ok := chunkMap[doc.AnimationNodes.BufferView]; ok {
-		switch bytesPerId {
-		case 1:
-			doc.AnimationNodes.AnimationData = bytes
-		case 2:
-			var uint16Slice []uint16
-			uint16Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint16Slice)))
-			uint16Header.Cap = len(bytes) / 2
-			uint16Header.Len = len(bytes) / 2
-			uint16Header.Data = uintptr(unsafe.Pointer(&bytes[0]))
+	if doc.AnimationNodes != nil {
+		if cd, ok := chunkMap[doc.AnimationNodes.BufferView]; ok {
+			switch doc.AnimationNodes.BytesPerId {
+			case 1:
+				doc.AnimationNodes.AnimationData = cd.data
+			case 2:
+				var uint16Slice []uint16
+				uint16Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint16Slice)))
+				uint16Header.Cap = len(cd.data) / 2
+				uint16Header.Len = len(cd.data) / 2
+				uint16Header.Data = uintptr(unsafe.Pointer(&cd.data[0]))
 
-			u16 := make([]uint16, len(bytes)/2)
+				u16 := make([]uint16, len(cd.data)/2)
 
-			copy(u16, uint16Slice)
+				copy(u16, uint16Slice)
 
-			doc.AnimationNodes.AnimationData = u16
-		case 4:
-			var uint32Slice []uint32
-			uint32Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint32Slice)))
-			uint32Header.Cap = len(bytes) / 4
-			uint32Header.Len = len(bytes) / 4
-			uint32Header.Data = uintptr(unsafe.Pointer(&bytes[0]))
+				doc.AnimationNodes.AnimationData = u16
+			case 4:
+				var uint32Slice []uint32
+				uint32Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint32Slice)))
+				uint32Header.Cap = len(cd.data) / 4
+				uint32Header.Len = len(cd.data) / 4
+				uint32Header.Data = uintptr(unsafe.Pointer(&cd.data[0]))
 
-			u32 := make([]uint32, len(bytes)/2)
+				u32 := make([]uint32, len(cd.data)/2)
 
-			copy(u32, uint32Slice)
+				copy(u32, uint32Slice)
 
-			doc.AnimationNodes.AnimationData = u32
+				doc.AnimationNodes.AnimationData = u32
+			}
 		}
 	}
 }
