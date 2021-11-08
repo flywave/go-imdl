@@ -62,7 +62,7 @@ func (e *Encoder) Encode(doc *Document) error {
 		return err
 	}
 
-	return err
+	return nil
 }
 
 func (e *Encoder) encodeBinary(doc *Document) error {
