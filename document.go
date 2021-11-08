@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"image"
+	"reflect"
+	"unsafe"
 
 	"github.com/flywave/gltf"
 )
@@ -591,9 +593,8 @@ type RenderMaterial struct {
 }
 
 type Scene struct {
-	Name           string   `json:"name,omitempty"`
-	Nodes          []string `json:"nodes,omitempty"`
-	AnimationNodes []string `json:"animationNodes,omitempty"`
+	Name  string   `json:"name,omitempty"`
+	Nodes []string `json:"nodes,omitempty"`
 }
 
 type Material struct {
@@ -611,8 +612,9 @@ type Material struct {
 }
 
 type AnimationNodes struct {
-	BufferView string `json:"bufferView"`
-	BytesPerId uint32 `json:"bytesPerId"`
+	BufferView    string      `json:"bufferView"`
+	BytesPerId    uint32      `json:"bytesPerId"`
+	AnimationData interface{} `json:"-"`
 }
 
 type Document struct {
@@ -720,6 +722,37 @@ func (doc *Document) decodeChunkData(data []byte) {
 			t.TextureData = DecodeTexture(cd.data, TextureFormat(t.Format))
 		}
 	}
+
+	if cd, ok := chunkMap[doc.AnimationNodes.BufferView]; ok {
+		switch bytesPerId {
+		case 1:
+			doc.AnimationNodes.AnimationData = bytes
+		case 2:
+			var uint16Slice []uint16
+			uint16Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint16Slice)))
+			uint16Header.Cap = len(bytes) / 2
+			uint16Header.Len = len(bytes) / 2
+			uint16Header.Data = uintptr(unsafe.Pointer(&bytes[0]))
+
+			u16 := make([]uint16, len(bytes)/2)
+
+			copy(u16, uint16Slice)
+
+			doc.AnimationNodes.AnimationData = u16
+		case 4:
+			var uint32Slice []uint32
+			uint32Header := (*reflect.SliceHeader)((unsafe.Pointer(&uint32Slice)))
+			uint32Header.Cap = len(bytes) / 4
+			uint32Header.Len = len(bytes) / 4
+			uint32Header.Data = uintptr(unsafe.Pointer(&bytes[0]))
+
+			u32 := make([]uint32, len(bytes)/2)
+
+			copy(u32, uint32Slice)
+
+			doc.AnimationNodes.AnimationData = u32
+		}
+	}
 }
 
 func (doc *Document) encodeChunkData() ([][]byte, uint32) {
@@ -813,6 +846,46 @@ func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 			chunkid++
 		}
 		doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, TextureFormat(t.Format))})
+	}
+
+	if doc.AnimationNodes != nil {
+		if doc.AnimationNodes.BufferView == "" {
+			doc.AnimationNodes.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+			chunkid++
+		}
+		switch t := doc.AnimationNodes.AnimationData.(type) {
+		case []byte:
+			doc.AnimationNodes.BytesPerId = 1
+			doc.chunks = append(doc.chunks, chunkData{name: doc.AnimationNodes.BufferView, data: t})
+		case []uint16:
+			doc.AnimationNodes.BytesPerId = 2
+
+			var bytesSlice []byte
+			bytesHeader := (*reflect.SliceHeader)((unsafe.Pointer(&bytesSlice)))
+			bytesHeader.Cap = len(t) * 2
+			bytesHeader.Len = len(t) * 2
+			bytesHeader.Data = uintptr(unsafe.Pointer(&t[0]))
+
+			data := make([]byte, len(bytesSlice))
+
+			copy(data, bytesSlice)
+
+			doc.chunks = append(doc.chunks, chunkData{name: doc.AnimationNodes.BufferView, data: data})
+		case []uint32:
+			doc.AnimationNodes.BytesPerId = 4
+
+			var bytesSlice []byte
+			bytesHeader := (*reflect.SliceHeader)((unsafe.Pointer(&bytesSlice)))
+			bytesHeader.Cap = len(t) * 4
+			bytesHeader.Len = len(t) * 4
+			bytesHeader.Data = uintptr(unsafe.Pointer(&t[0]))
+
+			data := make([]byte, len(bytesSlice))
+
+			copy(data, bytesSlice)
+
+			doc.chunks = append(doc.chunks, chunkData{name: doc.AnimationNodes.BufferView, data: data})
+		}
 	}
 
 	offset := uint32(0)
