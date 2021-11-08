@@ -591,8 +591,9 @@ type RenderMaterial struct {
 }
 
 type Scene struct {
-	Name  string   `json:"name,omitempty"`
-	Nodes []string `json:"nodes,omitempty"`
+	Name           string   `json:"name,omitempty"`
+	Nodes          []string `json:"nodes,omitempty"`
+	AnimationNodes []string `json:"animationNodes,omitempty"`
 }
 
 type Material struct {
