@@ -618,7 +618,7 @@ type Document struct {
 	Materials        map[string]*Material       `json:"materials,omitempty" validate:"dive"`
 	Meshes           map[string]*Mesh           `json:"meshes,omitempty" validate:"dive"`
 	Nodes            map[string]string          `json:"nodes,omitempty" validate:"dive"`
-	Scene            *string                    `json:"scene,omitempty"`
+	Scene            *Scene                     `json:"scene,omitempty"`
 	Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
 	NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
 	RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
@@ -631,7 +631,7 @@ func newString(s string) *string {
 
 func NewDocument() *Document {
 	return &Document{
-		Scene:  newString("defaultScene"),
+		Scene:  &Scene{Name: "defaultScene"},
 		Scenes: map[string]*Scene{"defaultScene": {Nodes: []string{"rootNode"}}},
 	}
 }
@@ -643,6 +643,104 @@ func (doc *Document) FindBuffer(bufferView string) []byte {
 		}
 	}
 	return nil
+}
+
+func (doc *Document) UnmarshalJSON(data []byte) error {
+	type sceneDocument struct {
+		Scene interface{} `json:"scene,omitempty"`
+	}
+
+	type _document struct {
+		ExtensionsUsed   []string                   `json:"extensionsUsed,omitempty"`
+		GLExtensionsUsed []string                   `json:"glExtensionsUsed,omitempty"`
+		Buffers          map[string]*Buffer         `json:"buffers,omitempty" validate:"dive"`
+		BufferViews      map[string]*BufferView     `json:"bufferViews,omitempty" validate:"dive"`
+		Materials        map[string]*Material       `json:"materials,omitempty" validate:"dive"`
+		Meshes           map[string]*Mesh           `json:"meshes,omitempty" validate:"dive"`
+		Nodes            map[string]string          `json:"nodes,omitempty" validate:"dive"`
+		Scene            string                     `json:"scene,omitempty"`
+		Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
+		NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
+		RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
+	}
+
+	var d sceneDocument
+	err := json.Unmarshal(data, &d)
+	if err != nil {
+		return err
+	}
+	var scene Scene
+	if s, ok := d.Scene.(string); ok {
+		scene.Name = s
+		var _doc _document
+		err = json.Unmarshal(data, &_doc)
+		if err != nil {
+			return err
+		} else {
+			doc.ExtensionsUsed = _doc.ExtensionsUsed
+			doc.GLExtensionsUsed = _doc.GLExtensionsUsed
+			doc.Buffers = _doc.Buffers
+			doc.BufferViews = _doc.BufferViews
+			doc.Materials = _doc.Materials
+			doc.Meshes = _doc.Meshes
+			doc.Nodes = _doc.Nodes
+			doc.Scenes = _doc.Scenes
+			doc.NamedTextures = _doc.NamedTextures
+			doc.RenderMaterials = _doc.RenderMaterials
+			doc.Scene = &scene
+		}
+	} else {
+		err := json.Unmarshal(data, doc)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (doc *Document) MarshalJSON() ([]byte, error) {
+	type _document struct {
+		ExtensionsUsed   []string                   `json:"extensionsUsed,omitempty"`
+		GLExtensionsUsed []string                   `json:"glExtensionsUsed,omitempty"`
+		Buffers          map[string]*Buffer         `json:"buffers,omitempty" validate:"dive"`
+		BufferViews      map[string]*BufferView     `json:"bufferViews,omitempty" validate:"dive"`
+		Materials        map[string]*Material       `json:"materials,omitempty" validate:"dive"`
+		Meshes           map[string]*Mesh           `json:"meshes,omitempty" validate:"dive"`
+		Nodes            map[string]string          `json:"nodes,omitempty" validate:"dive"`
+		Scene            string                     `json:"scene,omitempty"`
+		Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
+		NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
+		RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
+	}
+
+	if doc.Scene != nil && doc.Scene.Name != "" && len(doc.Scene.AnimationNodes) == 0 && len(doc.Scene.Nodes) == 0 {
+		var _doc _document
+
+		_doc.ExtensionsUsed = doc.ExtensionsUsed
+		_doc.GLExtensionsUsed = doc.GLExtensionsUsed
+		_doc.Buffers = doc.Buffers
+		_doc.BufferViews = doc.BufferViews
+		_doc.Materials = doc.Materials
+		_doc.Meshes = doc.Meshes
+		_doc.Nodes = doc.Nodes
+		_doc.Scenes = doc.Scenes
+		_doc.NamedTextures = doc.NamedTextures
+		_doc.RenderMaterials = doc.RenderMaterials
+		_doc.Scene = doc.Scene.Name
+
+		b, err := json.Marshal(&_doc)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	} else {
+		b, err := json.Marshal(doc)
+		if err != nil {
+			return nil, err
+		}
+		return b, nil
+	}
 }
 
 func (doc *Document) decodeChunkData(data []byte) {
