@@ -71,6 +71,10 @@ func (d *MeshData) Quantize() (*Range3d, *Range2d) {
 		}
 	}
 
+	if qParams2d == nil {
+		return qParams3d.GetRange(), nil
+	}
+
 	return qParams3d.GetRange(), qParams2d.GetRange()
 }
 
