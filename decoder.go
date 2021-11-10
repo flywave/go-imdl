@@ -9,10 +9,7 @@ import (
 	"io"
 	"math"
 	"os"
-	"path/filepath"
 	"unsafe"
-
-	"github.com/flywave/gltf"
 )
 
 const (
@@ -26,7 +23,7 @@ func Open(name string) (*Document, error) {
 		return nil, err
 	}
 	defer f.Close()
-	dec := NewDecoder(f).WithReadHandler(&gltf.RelativeFileHandler{Dir: filepath.Dir(name)})
+	dec := NewDecoder(f)
 	doc := new(Document)
 	if err = dec.Decode(doc); err != nil {
 		doc = nil
@@ -35,7 +32,6 @@ func Open(name string) (*Document, error) {
 }
 
 type Decoder struct {
-	ReadHandler            gltf.ReadHandler
 	MaxExternalBufferCount int
 	MaxMemoryAllocation    uint64
 	r                      *bufio.Reader
@@ -43,16 +39,10 @@ type Decoder struct {
 
 func NewDecoder(r io.Reader) *Decoder {
 	return &Decoder{
-		ReadHandler:            new(gltf.RelativeFileHandler),
 		MaxExternalBufferCount: defaultMaxExternalBufferCount,
 		MaxMemoryAllocation:    defaultMaxMemoryAllocation,
 		r:                      bufio.NewReader(r),
 	}
-}
-
-func (d *Decoder) WithReadHandler(h gltf.ReadHandler) *Decoder {
-	d.ReadHandler = h
-	return d
 }
 
 func (d *Decoder) Decode(doc *Document) error {

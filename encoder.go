@@ -5,9 +5,6 @@ import (
 	"encoding/json"
 	"io"
 	"os"
-	"path/filepath"
-
-	"github.com/flywave/gltf"
 )
 
 func Save(doc *Document, name string) error {
@@ -23,7 +20,7 @@ func saveImdl(doc *Document, name string, asBinary bool) error {
 	if err != nil {
 		return err
 	}
-	e := NewEncoder(f).WithWriteHandler(&gltf.RelativeFileHandler{Dir: filepath.Dir(name)})
+	e := NewEncoder(f)
 	e.AsBinary = asBinary
 	if err := e.Encode(doc); err != nil {
 		f.Close()
@@ -33,22 +30,15 @@ func saveImdl(doc *Document, name string, asBinary bool) error {
 }
 
 type Encoder struct {
-	AsBinary     bool
-	WriteHandler gltf.WriteHandler
-	w            io.Writer
+	AsBinary bool
+	w        io.Writer
 }
 
 func NewEncoder(w io.Writer) *Encoder {
 	return &Encoder{
-		AsBinary:     true,
-		WriteHandler: new(gltf.RelativeFileHandler),
-		w:            w,
+		AsBinary: true,
+		w:        w,
 	}
-}
-
-func (e *Encoder) WithWriteHandler(h gltf.WriteHandler) *Encoder {
-	e.WriteHandler = h
-	return e
 }
 
 func (e *Encoder) Encode(doc *Document) error {
