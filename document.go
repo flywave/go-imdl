@@ -843,11 +843,13 @@ func (doc *Document) encodeChunkData() ([][]byte, uint32) {
 	}
 
 	for _, t := range doc.NamedTextures {
-		if t.BufferView == "" {
-			t.BufferView = fmt.Sprintf("buffer-%d", chunkid)
-			chunkid++
+		if t.TextureData != nil {
+			if t.BufferView == "" {
+				t.BufferView = fmt.Sprintf("buffer-%d", chunkid)
+				chunkid++
+			}
+			doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, TextureFormat(t.Format))})
 		}
-		doc.chunks = append(doc.chunks, chunkData{name: t.BufferView, data: EncodeTexture(t.TextureData, TextureFormat(t.Format))})
 	}
 
 	if doc.AnimationNodes != nil {
