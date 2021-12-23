@@ -593,7 +593,6 @@ type RenderMaterial struct {
 }
 
 type Scene struct {
-	Name  string   `json:"name,omitempty"`
 	Nodes []string `json:"nodes,omitempty"`
 }
 
@@ -618,19 +617,18 @@ type AnimationNodes struct {
 }
 
 type Document struct {
-	ExtensionsUsed   []string                   `json:"extensionsUsed,omitempty"`
-	GLExtensionsUsed []string                   `json:"glExtensionsUsed,omitempty"`
-	Buffers          map[string]*Buffer         `json:"buffers,omitempty" validate:"dive"`
-	BufferViews      map[string]*BufferView     `json:"bufferViews,omitempty" validate:"dive"`
-	Materials        map[string]*Material       `json:"materials,omitempty" validate:"dive"`
-	Meshes           map[string]*Mesh           `json:"meshes,omitempty" validate:"dive"`
-	Nodes            map[string]string          `json:"nodes,omitempty" validate:"dive"`
-	Scene            *string                    `json:"scene,omitempty"`
-	Scenes           map[string]*Scene          `json:"scenes,omitempty" validate:"dive"`
-	NamedTextures    map[string]*RenderTexture  `json:"namedTextures,omitempty" validate:"dive"`
-	RenderMaterials  map[string]*RenderMaterial `json:"renderMaterials,omitempty" validate:"dive"`
-	AnimationNodes   *AnimationNodes            `json:"animationNodes,omitempty"`
-	chunks           []chunkData                `json:"-"`
+	Buffers         map[string]*Buffer            `json:"buffers,omitempty" validate:"dive"`
+	BufferViews     map[string]*BufferView        `json:"bufferViews,omitempty" validate:"dive"`
+	Materials       map[string]*Material          `json:"materials,omitempty" validate:"dive"`
+	Meshes          map[string]*Mesh              `json:"meshes,omitempty" validate:"dive"`
+	Nodes           map[string]string             `json:"nodes,omitempty" validate:"dive"`
+	Scene           *string                       `json:"scene,omitempty"`
+	Scenes          map[string]*Scene             `json:"scenes,omitempty" validate:"dive"`
+	NamedTextures   map[string]*RenderTexture     `json:"namedTextures,omitempty" validate:"dive"`
+	RenderMaterials map[string]*RenderMaterial    `json:"renderMaterials,omitempty" validate:"dive"`
+	AnimationNodes  *AnimationNodes               `json:"animationNodes,omitempty"`
+	PatternSymbols  map[string]*AreaPatternSymbol `json:"patternSymbols,omitempty"`
+	chunks          []chunkData                   `json:"-"`
 }
 
 func newString(s string) *string {
